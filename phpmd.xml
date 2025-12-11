@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<ruleset name="Laravel Project - Complete PHPMD Rules"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+    <description>
+        Complete PHPMD ruleset for Laravel projects.
+        All rules enabled except StaticAccess (Laravel Facades).
+        Optimized for modern PHP 8.4 and Laravel 11.
+    </description>
+
+    <!-- ============================================ -->
+    <!-- EXCLUDE PATTERNS -->
+    <!-- ============================================ -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/storage/*</exclude-pattern>
+    <exclude-pattern>*/bootstrap/cache/*</exclude-pattern>
+    <exclude-pattern>*/bootstrap/autoload.php</exclude-pattern>
+    <exclude-pattern>*/database/migrations/*</exclude-pattern>
+    <exclude-pattern>*/database/seeders/*</exclude-pattern>
+    <exclude-pattern>*/_ide_helper*.php</exclude-pattern>
+    <exclude-pattern>*/.phpstorm.meta.php</exclude-pattern>
+    <exclude-pattern>*.blade.php</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/public/*</exclude-pattern>
+
+    <!-- ============================================ -->
+    <!-- CLEAN CODE RULES -->
+    <!-- ============================================ -->
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess"/>
+    </rule>
+
+    <rule ref="rulesets/cleancode.xml/BooleanArgumentFlag">
+        <priority>3</priority>
+        <properties>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/cleancode.xml/ElseExpression">
+        <priority>3</priority>
+    </rule>
+
+    <rule ref="rulesets/cleancode.xml/IfStatementAssignment">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="rulesets/cleancode.xml/UndefinedVariable">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="rulesets/cleancode.xml/MissingImport">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="rulesets/cleancode.xml/ErrorControlOperator">
+        <priority>2</priority>
+    </rule>
+
+    <!-- ============================================ -->
+    <!-- CODE SIZE RULES -->
+    <!-- ============================================ -->
+    <rule ref="rulesets/codesize.xml"/>
+
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <priority>2</priority>
+        <properties>
+            <property name="reportLevel" value="10"/>
+            <property name="showClassesComplexity" value="true"/>
+            <property name="showMethodsComplexity" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/NPathComplexity">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="200"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="100"/>
+            <property name="ignore-whitespace" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/ExcessiveClassLength">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="1000"/>
+            <property name="ignore-whitespace" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/ExcessiveParameterList">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="10"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/ExcessivePublicCount">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="45"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/TooManyFields">
+        <priority>3</priority>
+        <properties>
+            <property name="maxfields" value="15"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/TooManyMethods">
+        <priority>3</priority>
+        <properties>
+            <property name="maxmethods" value="25"/>
+            <property name="ignorepattern" value="(^(set|get|is|has))i"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+        <priority>3</priority>
+        <properties>
+            <property name="maxmethods" value="20"/>
+            <property name="ignorepattern" value="(^(set|get|is|has))i"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity">
+        <priority>3</priority>
+        <properties>
+            <property name="maximum" value="50"/>
+        </properties>
+    </rule>
+
+    <!-- ============================================ -->
+    <!-- CONTROVERSIAL RULES -->
+    <!-- ============================================ -->
+    <rule ref="rulesets/controversial.xml"/>
+
+    <rule ref="rulesets/controversial.xml/Superglobals">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="rulesets/controversial.xml/CamelCaseClassName">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="rulesets/controversial.xml/CamelCasePropertyName">
+        <priority>2</priority>
+        <properties>
+            <property name="allow-underscore" value="false"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/controversial.xml/CamelCaseMethodName">
+        <priority>2</priority>
+        <properties>
+            <property name="allow-underscore" value="true"/>  <!-- test_method_names OK -->
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/controversial.xml/CamelCaseParameterName">
+        <priority>2</priority>
+        <properties>
+            <property name="allow-underscore" value="false"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/controversial.xml/CamelCaseVariableName">
+        <priority>2</priority>
+        <properties>
+            <property name="allow-underscore" value="false"/>
+        </properties>
+    </rule>
+
+    <!-- ============================================ -->
+    <!-- DESIGN RULES -->
+    <!-- ============================================ -->
+    <rule ref="rulesets/design.xml"/>
+
+    <rule ref="rulesets/design.xml/ExitExpression">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="rulesets/design.xml/EvalExpression">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="rulesets/design.xml/GotoStatement">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="rulesets/design.xml/NumberOfChildren">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="15"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/design.xml/DepthOfInheritance">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="6"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <priority>3</priority>
+        <properties>
+            <property name="maximum" value="13"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/design.xml/DevelopmentCodeFragment">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="rulesets/design.xml/EmptyCatchBlock">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="rulesets/design.xml/CountInLoopExpression">
+        <priority>2</priority>
+    </rule>
+
+    <!-- ============================================ -->
+    <!-- NAMING RULES -->
+    <!-- ============================================ -->
+    <rule ref="rulesets/naming.xml"/>
+
+    <rule ref="rulesets/naming.xml/ShortVariable">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="3"/>
+            <property name="exceptions" value="id,db,ip,ui,up,to,by"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/naming.xml/LongVariable">
+        <priority>3</priority>
+        <properties>
+            <property name="maximum" value="40"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/naming.xml/ShortMethodName">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="3"/>
+            <property name="exceptions" value="up,go,to,by,id,is"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="rulesets/naming.xml/ConstantNamingConventions">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="rulesets/naming.xml/BooleanGetMethodName">
+        <priority>3</priority>
+        <properties>
+            <property name="checkParameterizedMethods" value="false"/>
+        </properties>
+    </rule>
+
+    <!-- ============================================ -->
+    <!-- UNUSED CODE RULES -->
+    <!-- ============================================ -->
+    <rule ref="rulesets/unusedcode.xml"/>
+
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateField">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="rulesets/unusedcode.xml/UnusedFormalParameter">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="rulesets/unusedcode.xml/UnusedLocalVariable">
+        <priority>2</priority>
+    </rule>
+
+</ruleset>

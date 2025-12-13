@@ -20,4 +20,12 @@
             <directory name="bootstrap/cache"/>
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <UndefinedDocblockClass>
+            <errorLevel type="suppress">
+                <directory name="app/Models" />
+            </errorLevel>
+        </UndefinedDocblockClass>
+    </issueHandlers>
 </psalm>

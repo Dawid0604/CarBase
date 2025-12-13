@@ -11,7 +11,8 @@
     "require": {
         "php": "^8.4",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "laravel/ui": "^4.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
@@ -63,7 +64,8 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@ide-helper"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -75,6 +77,18 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "ide-helper": [
+            "@php artisan ide-helper:models --write --ansi --quiet --no-interaction"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan analyse --memory-limit=2G"
+        ],
+        "phpmd": [
+            "vendor/bin/phpmd app text phpmd.xml --exclude tests"
+        ],
+        "psalm": [
+            "vendor/bin/psalm --show-info=false"
         ]
     },
     "extra": {

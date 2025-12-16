@@ -27,12 +27,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \App\Models\CarEngine $engine
  * @property-read \App\Models\User $user
  * @property-write mixed $dynamic
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngineReview newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngineReview newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngineReview query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereConsumption($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereDynamic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereEngineId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereRecommendation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereReliability($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview query()
  * @mixin \Eloquent
  */
-final class CarEngineReview extends Model
+final class EngineReview extends Model
 {
     protected $fillable = [
         'consumption',

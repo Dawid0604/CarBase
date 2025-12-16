@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\ValueObjects;
 
+use App\Models\Engine;
 use InvalidArgumentException;
-use App\Models\{Engine, EngineFuelType};
 
 readonly class EngineDto
 {
@@ -15,7 +15,10 @@ readonly class EngineDto
         public float $power,
         public string $fuelType,
         public string $brandName,
-        public string $brandLogo
+        public string $brandLogo,
+        public int $numberOfViews,
+        public int $likes,
+        public int $dislikes
     ) {
 
         if (empty($name)) {
@@ -35,7 +38,10 @@ readonly class EngineDto
             power: $model->power,
             fuelType: $model->fuel_type->getTranslatedName(),
             brandName: $model->brand->name,
-            brandLogo: $model->brand->logo
+            brandLogo: $model->brand->logo,
+            numberOfViews: $model->number_of_views,
+            likes: $model->likes,
+            dislikes: $model->dislikes
         );
     }
 }

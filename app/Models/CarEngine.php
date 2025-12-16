@@ -62,7 +62,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereViewsCount($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarEngineReview> $reviews
  * @property array|null $transmission_types
  * @property array|null $drive_types
  * @property int $engine_id
@@ -72,6 +71,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereDriveTypes($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereEngineId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionTypes($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $reviews
  * @mixin \Eloquent
  */
 final class CarEngine extends Model
@@ -115,7 +115,7 @@ final class CarEngine extends Model
 
     public function reviews(): HasMany
     {
-        return $this->hasMany(CarEngineReview::class);
+        return $this->hasMany(EngineReview::class);
     }
 
     public function getFullName(): string

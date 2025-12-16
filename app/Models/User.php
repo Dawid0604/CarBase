@@ -39,10 +39,10 @@ use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarEngineReview> $engineReviews
  * @property-read int|null $engine_reviews_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGenerationReview> $generationsReviews
  * @property-read int|null $generations_reviews_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $engineReviews
  * @mixin \Eloquent
  */
 final class User extends Authenticatable
@@ -89,7 +89,7 @@ final class User extends Authenticatable
 
     public function engineReviews(): HasMany
     {
-        return $this->hasMany(CarEngineReview::class);
+        return $this->hasMany(EngineReview::class);
     }
 
     public function hasUserRole(): bool

@@ -30,7 +30,7 @@ final class EngineRepositoryImpl implements EngineRepository
 
         return Engine::selectWithBrand()
             ->limit($numberOfRows)
-            ->orderByDesc('id')
+            ->orderByDesc('number_of_views')
             ->orderBy('name')
             ->get();
     }

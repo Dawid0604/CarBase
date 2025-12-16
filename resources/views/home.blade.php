@@ -11,8 +11,8 @@
 
                 @forelse ($engines['newest'] as $engine)
                     <div class="card p-2 mb-2 text-center">
-                        <img src="{{ $engine->brandLogo }}"
-                            alt="{{ $engine->brandName }} logo" class="img-thumbnail mx-auto d-block" style="max-width: 40%;">
+                        <img src="{{ $engine->brandLogo }}" alt="{{ $engine->brandName }} logo"
+                            class="img-thumbnail mx-auto d-block" style="max-width: 40%;">
 
                         <h6 class="card-title mb-1 mt-2">{{ $engine->name }}</h6>
 
@@ -34,14 +34,28 @@
 
                 @forelse ($engines['popular'] as $engine)
                     <div class="card p-2 mb-2 text-center">
-                        <img src="{{ $engine->brandLogo }}"
-                            alt="{{ $engine->brandName }} logo" class="img-thumbnail mx-auto d-block" style="max-width: 40%;">
+                        <img src="{{ $engine->brandLogo }}" alt="{{ $engine->brandName }} logo"
+                            class="img-thumbnail mx-auto d-block" style="max-width: 40%;">
 
                         <h6 class="card-title mb-1 mt-2">{{ $engine->name }}</h6>
 
                         <div class="d-flex justify-content-center align-items-center p-1 flex-wrap">
                             <span class="m-1 badge bg-success">{{ $engine->fuelType }}</span>
                             <span class="m-1 badge bg-warning">{{ $engine->power }} KM</span>
+                        </div>
+
+                        <div class="d-flex justify-content-center align-items-center p-1 flex-wrap">
+                            <span class="m-1 badge bg-success">
+                                {{ $engine->likes }} <i class="bi bi-hand-thumbs-up-fill"></i>
+                            </span>
+
+                            <span class="m-1 badge bg-danger">
+                                {{ $engine->dislikes }} <i class="bi bi-hand-thumbs-down-fill"></i>
+                            </span>
+
+                            <span class="m-1 badge bg-info">
+                                {{ $engine->numberOfViews }} <i class="bi bi-eye-fill"></i>
+                            </span>
                         </div>
                     </div>
                 @empty

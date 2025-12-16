@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\{Builder, Model};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -27,6 +28,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $power
  * @property int $brand_id
  * @property \App\Models\EngineLayout $layout
+ * @property-read int|null $reviews_total
+ * @property-read int|null $likes
+ * @property-read int|null $dislikes
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine query()
@@ -52,6 +56,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \App\Models\CarBrand $brand
  * @method static Builder<static>|Engine selectWithBrand()
  * @property \App\Models\EngineFuelType $fuel_type
+ * @property int $number_of_views
+ * @method static Builder<static>|Engine whereNumberOfViews($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $engineReviews
+ * @property-read int|null $engine_reviews_count
  * @mixin \Eloquent
  */
 final class Engine extends Model
@@ -89,7 +97,8 @@ final class Engine extends Model
         'dynamic' => 'integer',
         'recommendation' => 'bool',
         'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'updated_at' => 'datetime',
+        'number_of_views' => 'integer'
     ];
 
     public function brand(): BelongsTo
@@ -97,16 +106,33 @@ final class Engine extends Model
         return $this->belongsTo(CarBrand::class);
     }
 
+    public function engineReviews(): HasMany
+    {
+        return $this->hasMany(EngineReview::class);
+    }
+
     public function scopeSelectWithBrand(Builder $builder): Builder
     {
         return $builder
-            ->with('brand:id,name,logo')
             ->select([
                 'id',
                 'name',
                 'power',
                 'fuel_type',
+                'number_of_views',
                 'brand_id'
+            ])
+            ->with('brand:id,name,logo')
+            ->withCount([
+                'engineReviews as reviews_total',
+
+                'engineReviews as likes' => function ($query): void {
+                    $query->where('recommendation', true);
+                },
+
+                'engineReviews as dislikes' => function ($query): void {
+                    $query->where('recommendation', false);
+                }
             ]);
     }
 }

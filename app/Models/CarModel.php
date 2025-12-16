@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 /**
  * @property int $id
@@ -25,16 +25,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel joinWithBrand()
  * @mixin \Eloquent
  */
 final class CarModel extends Model
 {
     protected $fillable = [
         'name'
-    ];
-
-    protected $with = [
-        'brand'
     ];
 
     protected $casts = [
@@ -55,5 +52,15 @@ final class CarModel extends Model
     public function getFullName(): string
     {
         return $this->brand->name . ' ' . $this->name;
+    }
+
+    public function scopeJoinWithBrand(Builder $builder): Builder
+    {
+        return $builder->join(
+            'car_brands',
+            'car_models.brand_id',
+            '=',
+            'car_brands.id'
+        );
     }
 }

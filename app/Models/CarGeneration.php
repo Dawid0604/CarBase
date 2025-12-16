@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use Illuminate\Database\Eloquent\{Builder, Model};
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
 
 /**
  * @property int $id
@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarGeneration whereProductionTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarGeneration whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarGeneration whereUpdatedAt($value)
+ * @method static Builder<static>|CarGeneration joinWithBrand()
+ * @method static Builder<static>|CarGeneration joinWithModel()
  * @mixin \Eloquent
  */
 final class CarGeneration extends Model
@@ -57,13 +59,38 @@ final class CarGeneration extends Model
         return $this->belongsTo(CarModel::class);
     }
 
-    public function engines(): HasMany
-    {
-        return $this->hasMany(CarEngine::class);
-    }
-
     public function getFullName(): string
     {
         return $this->model->name . ' ' . $this->name;
+    }
+
+    public function scopeJoinWithBrand(Builder $builder): Builder
+    {
+        return $builder->join(
+            'car_brands',
+            'car_models.brand_id',
+            '=',
+            'car_brands.id'
+        );
+    }
+
+    public function scopeJoinWithModel(Builder $builder): Builder
+    {
+        return $builder->join(
+            'car_models',
+            'car_generations.model_id',
+            '=',
+            'car_models.id'
+        );
+    }
+
+    public function engines(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            CarEngine::class,
+            'car_generation_engines',
+            'generation_id',
+            'engine_id'
+        );
     }
 }

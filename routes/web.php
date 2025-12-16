@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+declare(strict_types=1);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\{Auth, Route};
+use App\Http\Controllers\{FallbackController, HomeController};
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+Route::get('/', [HomeController::class, 'index'])
     ->name('home');
+
+Route::fallback([FallbackController::class, 'handle'])
+    ->name('fallback');

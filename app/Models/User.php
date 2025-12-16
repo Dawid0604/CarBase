@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Override;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
 
 /**
  * @property int $id
@@ -25,7 +23,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property \App\Models\UserRole $role
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserReview> $reviews
  * @property-read int|null $reviews_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
@@ -42,6 +39,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarEngineReview> $engineReviews
+ * @property-read int|null $engine_reviews_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGenerationReview> $generationsReviews
+ * @property-read int|null $generations_reviews_count
  * @mixin \Eloquent
  */
 final class User extends Authenticatable
@@ -81,9 +82,14 @@ final class User extends Authenticatable
         'role' => UserRole::class
     ];
 
-    public function reviews(): HasMany
+    public function generationsReviews(): HasMany
     {
-        return $this->hasMany(UserReview::class);
+        return $this->hasMany(CarGenerationReview::class);
+    }
+
+    public function engineReviews(): HasMany
+    {
+        return $this->hasMany(CarEngineReview::class);
     }
 
     public function hasUserRole(): bool

@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Casts\MysqlSetCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
  * @property int $generation_id
  * @property string $name
- * @property \App\Models\CarFuelType $fuel_type
  * @property int $displacement
  * @property int $power
  * @property int $torque
@@ -34,7 +35,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\CarGeneration $generation
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserReview> $reviews
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine query()
@@ -62,6 +62,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereViewsCount($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarEngineReview> $reviews
+ * @property array|null $transmission_types
+ * @property array|null $drive_types
+ * @property int $engine_id
+ * @property-read \App\Models\Engine $engine
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGeneration> $generations
+ * @property-read int|null $generations_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereDriveTypes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereEngineId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionTypes($value)
  * @mixin \Eloquent
  */
 final class CarEngine extends Model
@@ -72,8 +82,8 @@ final class CarEngine extends Model
         'displacement',
         'power',
         'torque',
-        'transmission_type',
-        'drive_type',
+        'transmission_types',
+        'drive_types',
         'acceleration',
         'max_speed',
         'city_consumption',
@@ -96,24 +106,35 @@ final class CarEngine extends Model
         'oil_capacity' => 'decimal:2',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'fuel_type' => CarFuelType::class,
-        'transmission_type' => CarTransmissionType::class,
-        'drive_type' => CarDriveType::class,
+        'oil_change_interval' => 'array',
+        'timing_belt_change_interval' => 'array',
+        'transmission_types' => MysqlSetCast::class,
+        'drive_types' => MysqlSetCast::class,
         'timing_belt_type' => CarTimingBeltType::class
     ];
 
-    public function generation(): BelongsTo
-    {
-        return $this->belongsTo(CarGeneration::class);
-    }
-
     public function reviews(): HasMany
     {
-        return $this->hasMany(UserReview::class);
+        return $this->hasMany(CarEngineReview::class);
     }
 
     public function getFullName(): string
     {
         return $this->generation->getFullName() . ' ' . $this->name;
+    }
+
+    public function generations(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            CarGeneration::class,
+            'car_generation_engines',
+            'engine_id',
+            'generation_id'
+        );
+    }
+
+    public function engine(): BelongsTo
+    {
+        return $this->belongsTo(Engine::class);
     }
 }

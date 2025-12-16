@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarBrand whereLogo($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarBrand whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarBrand whereUpdatedAt($value)
+ * @method static Builder<static>|CarBrand findAll()
  * @mixin \Eloquent
  */
 final class CarBrand extends Model
@@ -40,5 +42,14 @@ final class CarBrand extends Model
     public function models(): HasMany
     {
         return $this->hasMany(CarModel::class);
+    }
+
+    public function scopeFindAll(Builder $builder): Builder
+    {
+        return $builder->select([
+            'id',
+            'name',
+            'logo'
+        ])->orderBy('name');
     }
 }

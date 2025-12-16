@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\{CarBrandService, EngineService};
+use Illuminate\View\View;
 
-class HomeController extends Controller
+final class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    public function __construct(
+        private readonly CarBrandService $brandService,
+        private readonly EngineService $engineService
+    ) {}
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function index(): View
     {
-        return view('home');
+        return view('home', [
+            'brands' => $this->brandService->findAll(),
+            'engines' => [
+                'popular' => $this->engineService->findPopular(),
+                'newest' => $this->engineService->findNewest()
+            ]
+        ]);
     }
 }

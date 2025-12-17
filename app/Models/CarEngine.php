@@ -72,6 +72,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereEngineId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionTypes($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $reviews
+ * @property string $slug
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereSlug($value)
  * @mixin \Eloquent
  */
 final class CarEngine extends Model
@@ -93,7 +95,8 @@ final class CarEngine extends Model
         'oil_capacity',
         'oil_change_interval',
         'timing_belt_type',
-        'timing_belt_change_interval'
+        'timing_belt_change_interval',
+        'slug'
     ];
 
     protected $casts = [

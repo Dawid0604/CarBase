@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarGeneration whereUpdatedAt($value)
  * @method static Builder<static>|CarGeneration joinWithBrand()
  * @method static Builder<static>|CarGeneration joinWithModel()
+ * @property string $slug
+ * @method static Builder<static>|CarGeneration whereSlug($value)
  * @mixin \Eloquent
  */
 final class CarGeneration extends Model
@@ -43,7 +45,8 @@ final class CarGeneration extends Model
         'production_from',
         'production_to',
         'image',
-        'type'
+        'type',
+        'slug'
     ];
 
     protected $casts = [

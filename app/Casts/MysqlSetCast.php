@@ -38,10 +38,9 @@ final class MysqlSetCast implements CastsAttributes
     {
         $preparedValue = $value;
 
-        if($value === null) {
+        if ($value === null) {
             $preparedValue = null;
-
-        } elseif(\is_array($value)) {
+        } elseif (\is_array($value)) {
             $preparedValue = implode(',', $value);
         }
 

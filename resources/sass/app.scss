@@ -19,19 +19,12 @@
     box-shadow: 0 2px 4px rgba(46, 204, 113, 0.2);
 }
 
-.stat-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    margin: 0 0.5rem;
-    font-size: 0.85rem;
+.engine_link {
+    text-decoration: none;
 }
 
-.stat-item i {
-    font-size: 1rem;
-}
-
-.stat-item small {
-    font-weight: 600;
-    color: #495057;
+.engine_link:hover > div.card {
+    cursor: pointer;
+    color: rgb(1, 110, 110);
+    transition-duration: 250ms;
 }

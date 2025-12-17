@@ -60,6 +60,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder<static>|Engine whereNumberOfViews($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $engineReviews
  * @property-read int|null $engine_reviews_count
+ * @property string $slug
+ * @method static Builder<static>|Engine whereSlug($value)
  * @mixin \Eloquent
  */
 final class Engine extends Model
@@ -78,7 +80,8 @@ final class Engine extends Model
         'injection_type',
         'fuel_type',
         'comment',
-        'recommendation'
+        'recommendation',
+        'slug'
     ];
 
     protected $casts = [
@@ -120,7 +123,8 @@ final class Engine extends Model
                 'power',
                 'fuel_type',
                 'number_of_views',
-                'brand_id'
+                'brand_id',
+                'slug'
             ])
             ->with('brand:id,name,logo')
             ->withCount([

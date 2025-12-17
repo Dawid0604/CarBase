@@ -25,13 +25,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarBrand whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarBrand whereUpdatedAt($value)
  * @method static Builder<static>|CarBrand findAll()
+ * @property string $slug
+ * @method static Builder<static>|CarBrand whereSlug($value)
  * @mixin \Eloquent
  */
 final class CarBrand extends Model
 {
     protected $fillable = [
         'name',
-        'logo'
+        'logo',
+        'slug'
     ];
 
     protected $casts = [

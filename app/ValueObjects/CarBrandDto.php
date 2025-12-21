@@ -10,21 +10,25 @@ use InvalidArgumentException;
 readonly class CarBrandDto
 {
     private function __construct(
-        public int $brandId,
         public string $name,
-        public string $logo
+        public string $logo,
+        public string $slug
     ) {
         if (empty($name)) {
             throw new InvalidArgumentException('Name cannot be blank');
+        }
+
+        if (empty($slug)) {
+            throw new InvalidArgumentException('Slug cannot be blank');
         }
     }
 
     public static function fromModel(CarBrand $model): self
     {
         return new self(
-            brandId: $model->id,
             name: $model->name,
-            logo: $model->logo
+            logo: $model->logo,
+            slug: $model->slug
         );
     }
 }

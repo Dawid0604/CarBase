@@ -28,10 +28,18 @@ final class EngineRepositoryImpl implements EngineRepository
     {
         $numberOfRows = Config::get('pagination.index_page.popular_engines.items_per_page', 0);
 
-        return Engine::selectWithBrand()
+        return Engine::selectWithBrandAndStats()
             ->limit($numberOfRows)
             ->orderByDesc('number_of_views')
             ->orderBy('name')
             ->get();
+    }
+
+    #[Override]
+    public function findDetails(string $slug): Engine
+    {
+        return Engine::selectDetails()
+            ->whereSlug($slug)
+            ->firstOrFail();
     }
 }

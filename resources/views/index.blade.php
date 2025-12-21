@@ -21,7 +21,7 @@
     <div id="app">
         @include('navbar')
 
-        <main class="container-fluid vh-100">
+        <main class="container-fluid" style="min-height: 100vh">
             @yield('content')
         </main>
     </div>

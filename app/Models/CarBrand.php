@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{Builder, Model};
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -50,7 +49,7 @@ final class CarBrand extends Model
     public function scopeFindAll(Builder $builder): Builder
     {
         return $builder->select([
-            'id',
+            'slug',
             'name',
             'logo'
         ])->orderBy('name');

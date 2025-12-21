@@ -10,7 +10,6 @@ use InvalidArgumentException;
 readonly class EngineDto
 {
     private function __construct(
-        public int $engineId,
         public string $name,
         public float $power,
         public string $fuelType,
@@ -39,7 +38,6 @@ readonly class EngineDto
     public static function fromModel(Engine $model): self
     {
         return new self(
-            engineId: $model->id,
             name: $model->name,
             power: $model->power,
             fuelType: $model->fuel_type->getTranslatedName(),

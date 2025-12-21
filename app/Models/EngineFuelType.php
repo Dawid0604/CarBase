@@ -20,4 +20,19 @@ enum EngineFuelType: string
             EngineFuelType::ELECTRIC => 'Elektryk'
         };
     }
+
+    public function getBackgroundColor(): string
+    {
+        return match($this) {
+            EngineFuelType::GASOLINE => 'gradient-gasoline',
+            EngineFuelType::DIESEL => 'gradient-diesel',
+            EngineFuelType::HYBRID => 'gradient-hybrid',
+            EngineFuelType::ELECTRIC => 'gradient-electric'
+        };
+    }
+
+    public function shouldShowLpgInfo(): bool
+    {
+        return $this === EngineFuelType::GASOLINE || $this === EngineFuelType::HYBRID;
+    }
 }

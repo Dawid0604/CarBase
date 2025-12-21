@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Override;
-use App\ValueObjects\EngineDto;
 use Illuminate\Support\Collection;
 use App\Repositories\EngineRepository;
+use App\ValueObjects\{EngineDetailsDto, EngineDto};
 
 final class EngineServiceImpl implements EngineService
 {
@@ -29,5 +29,13 @@ final class EngineServiceImpl implements EngineService
             ->repository
             ->findNewest()
             ->map(EngineDto::fromModel(...));
+    }
+
+    #[Override]
+    public function findDetails(string $slug): EngineDetailsDto
+    {
+        return EngineDetailsDto::fromModel(
+            $this->repository->findDetails($slug)
+        );
     }
 }

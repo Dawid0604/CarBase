@@ -23,8 +23,48 @@
     text-decoration: none;
 }
 
-.engine_link:hover > div.card {
+.engine_link:hover>div.card {
     cursor: pointer;
     color: rgb(1, 110, 110);
     transition-duration: 250ms;
+}
+
+.gradient-blue-green-yellow {
+    background: #2A7B9B;
+    background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgb(86, 180, 125) 50%, rgba(42, 123, 155, 1) 100%);
+}
+
+.gradient-blue {
+    background: #5856cc;
+    background: linear-gradient(90deg, rgba(88, 86, 204, 1) 3%, rgba(69, 69, 181, 1) 33%, rgba(4, 122, 196, 1) 71%, rgba(98, 186, 204, 1) 100%);
+}
+
+.gradient-purple-orange {
+    background: #9660b5;
+    background: linear-gradient(90deg, rgba(150, 96, 181, 1) 9%, rgba(189, 91, 91, 1) 50%, rgba(252, 176, 69, 1) 100%);
+}
+
+.gradient-gasoline {
+    background: #60b577;
+    background: linear-gradient(90deg, rgb(18, 177, 60) 9%, rgb(84, 138, 98) 50%, rgba(18, 177, 60) 100%);
+}
+
+.gradient-diesel {
+    background: #1D2E21;
+    background: linear-gradient(90deg, rgba(29, 46, 33, 1) 9%, rgb(64, 97, 71) 50%, rgba(29, 46, 33, 1) 100%);
+}
+
+.gradient-hybrid {
+    background: #2D88BF;
+    background: linear-gradient(90deg, rgba(45, 136, 191, 1) 9%, rgb(72, 101, 119) 50%, rgba(45, 136, 191, 1) 100%);
+}
+
+.gradient-electric {
+    background: #485D66;
+    background: linear-gradient(90deg, rgba(72, 93, 102, 1) 9%, rgb(117, 153, 168) 50%, rgba(72, 93, 102, 1) 100%);
+}
+
+.engine-image {
+    background: #777a7d;
+    background: linear-gradient(90deg, rgba(119, 122, 125, 0.88) 9%, rgba(216, 225, 230, 1) 50%, rgba(119, 122, 125, 0.88) 100%);
 }

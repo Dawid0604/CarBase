@@ -9,4 +9,8 @@ use Illuminate\Support\Collection;
 interface CarBrandRepository
 {
     public function findAll(): Collection;
+
+    public function findNameBySlug(string $slug): string;
+
+    public function findRandomEngines(string $slug, int $numberOfRows): Collection;
 }

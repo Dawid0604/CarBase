@@ -14,6 +14,9 @@ Route::prefix('engine')->group(function () {
 
     Route::get('/{slug}', [EngineController::class, 'details'])
         ->name('engine.details');
+
+    Route::get('/list/{slug}', [EngineController::class, 'list'])
+        ->name('engine.list');
 });
 
 Route::fallback([FallbackController::class, 'handle'])

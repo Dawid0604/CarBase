@@ -12,7 +12,7 @@
             </li>
 
             <li class="breadcrumb-item">
-                <a href="">{{ $data->brand['name'] }}</a>
+                <a href="{{ route('engine.list', $data->brand['slug']) }}">{{ $data->brand['name'] }}</a>
             </li>
 
             <li class="breadcrumb-item active" aria-current="page">

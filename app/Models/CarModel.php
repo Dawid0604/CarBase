@@ -12,11 +12,13 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
  * @property int $id
  * @property int $brand_id
  * @property string $name
+ * @property string $slug
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\CarBrand $brand
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGeneration> $generations
  * @property-read int|null $generations_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel joinWithBrand()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel query()
@@ -24,10 +26,8 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel joinWithBrand()
- * @property string $slug
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarModel whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 final class CarModel extends Model

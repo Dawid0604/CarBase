@@ -68,3 +68,19 @@
     background: #777a7d;
     background: linear-gradient(90deg, rgba(119, 122, 125, 0.88) 9%, rgba(216, 225, 230, 1) 50%, rgba(119, 122, 125, 0.88) 100%);
 }
+
+.brand-a {
+    cursor: pointer;
+    text-decoration: none;
+    transition-duration: 250ms;
+}
+
+.brand-a:hover {
+    cursor: pointer;
+    color: rgb(1, 110, 110);
+    transition-duration: 250ms;
+}
+
+.brand-hover:hover {
+    font-weight: 600;
+}

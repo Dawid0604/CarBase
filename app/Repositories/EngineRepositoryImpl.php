@@ -18,8 +18,8 @@ final class EngineRepositoryImpl implements EngineRepository
 
         return Engine::selectWithBrand()
             ->limit($numberOfRows)
-            ->orderByDesc('id')
-            ->orderBy('name')
+            ->orderByDesc('engines.id')
+            ->orderBy('engines.name')
             ->get();
     }
 
@@ -30,8 +30,8 @@ final class EngineRepositoryImpl implements EngineRepository
 
         return Engine::selectWithBrandAndStats()
             ->limit($numberOfRows)
-            ->orderByDesc('number_of_views')
-            ->orderBy('name')
+            ->orderByDesc('engines.number_of_views')
+            ->orderBy('engines.name')
             ->get();
     }
 
@@ -41,5 +41,13 @@ final class EngineRepositoryImpl implements EngineRepository
         return Engine::selectDetails()
             ->whereSlug($slug)
             ->firstOrFail();
+    }
+
+    #[Override]
+    public function findAllByBrand(string $slug): Collection
+    {
+        return Engine::selectByBrand($slug)
+            ->orderBy('engines.name')
+            ->get();
     }
 }

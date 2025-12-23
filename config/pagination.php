@@ -16,5 +16,10 @@ return [
         'engine_reviews' => [
             'items_per_page' => 4
         ]
+    ],
+    'engine_list_page' => [
+        'random_engines' => [
+            'items_per_page' => 5
+        ]
     ]
 ];

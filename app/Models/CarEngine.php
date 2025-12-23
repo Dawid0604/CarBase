@@ -12,18 +12,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
- * @property int $generation_id
  * @property string $name
+ * @property string $slug
  * @property int $displacement
  * @property int $power
  * @property int $torque
- * @property \App\Models\CarTransmissionType $transmission_type
- * @property \App\Models\CarDriveType $drive_type
+ * @property array|null $transmission_types
+ * @property array|null $drive_types
  * @property string $oil_grade
  * @property numeric $oil_capacity
- * @property string $oil_change_interval
+ * @property array<array-key, mixed>|null $oil_change_interval
  * @property \App\Models\CarTimingBeltType $timing_belt_type
- * @property string $timing_belt_change_interval
+ * @property array<array-key, mixed>|null $timing_belt_change_interval
  * @property int|null $acceleration
  * @property int|null $max_speed
  * @property numeric|null $city_consumption
@@ -34,7 +34,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $reviews_count
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\CarGeneration $generation
+ * @property int $engine_id
+ * @property-read \App\Models\Engine $engine
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGeneration> $generations
+ * @property-read int|null $generations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $reviews
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine query()
@@ -44,9 +48,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereCityConsumption($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereDisplacement($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereDriveType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereFuelType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereGenerationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereDriveTypes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereEngineId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereMaxSpeed($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereName($value)
@@ -56,24 +59,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine wherePower($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereReviewsCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereRouteConsumption($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTimingBeltChangeInterval($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTimingBeltType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTorque($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionTypes($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereViewsCount($value)
- * @property array|null $transmission_types
- * @property array|null $drive_types
- * @property int $engine_id
- * @property-read \App\Models\Engine $engine
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGeneration> $generations
- * @property-read int|null $generations_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereDriveTypes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereEngineId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionTypes($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $reviews
- * @property string $slug
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereSlug($value)
  * @mixin \Eloquent
  */
 final class CarEngine extends Model
@@ -119,11 +111,6 @@ final class CarEngine extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(EngineReview::class);
-    }
-
-    public function getFullName(): string
-    {
-        return $this->generation->getFullName() . ' ' . $this->name;
     }
 
     public function generations(): BelongsToMany

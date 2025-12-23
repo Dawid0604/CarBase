@@ -7,7 +7,7 @@ namespace App\Services;
 use Override;
 use Illuminate\Support\Collection;
 use App\Repositories\EngineRepository;
-use App\ValueObjects\{EngineDetailsDto, EngineDto};
+use App\ValueObjects\{EngineDetailsDto, EngineDto, EngineListDto};
 
 final class EngineServiceImpl implements EngineService
 {
@@ -37,5 +37,14 @@ final class EngineServiceImpl implements EngineService
         return EngineDetailsDto::fromModel(
             $this->repository->findDetails($slug)
         );
+    }
+
+    #[Override]
+    public function findAllByBrand(string $slug): Collection
+    {
+        return $this
+            ->repository
+            ->findAllByBrand($slug)
+            ->map(EngineListDto::fromModel(...));
     }
 }

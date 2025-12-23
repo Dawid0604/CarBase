@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
 
+
 /**
  * @property int $id
  * @property string $name
@@ -21,9 +22,12 @@ use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
  * @property string|null $nickname
  * @property string|null $avatar
  * @property \App\Models\UserRole $role
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $engineReviews
+ * @property-read int|null $engine_reviews_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGenerationReview> $generationsReviews
+ * @property-read int|null $generations_reviews_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read int|null $reviews_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
@@ -39,10 +43,6 @@ use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
- * @property-read int|null $engine_reviews_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGenerationReview> $generationsReviews
- * @property-read int|null $generations_reviews_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $engineReviews
  * @mixin \Eloquent
  */
 final class User extends Authenticatable

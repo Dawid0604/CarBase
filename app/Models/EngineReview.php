@@ -13,20 +13,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $user_id
  * @property int $engine_id
  * @property int $rating
- * @property numeric|null $city_consumption
- * @property numeric|null $avg_consumption
- * @property numeric|null $route_consumption
  * @property int $reliability
- * @property int $comfort
  * @property int $consumption
- * @property int $maintenance_costs
+ * @property int $dynamic
  * @property string|null $comment
  * @property bool $recommendation
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\CarEngine $engine
  * @property-read \App\Models\User $user
- * @property-write mixed $dynamic
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereComment($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereConsumption($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereCreatedAt($value)
@@ -38,9 +36,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereReliability($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EngineReview query()
  * @mixin \Eloquent
  */
 final class EngineReview extends Model

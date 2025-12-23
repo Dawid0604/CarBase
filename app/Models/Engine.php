@@ -5,64 +5,63 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\{Builder, Model};
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 /**
  * @property int $id
  * @property string $name
+ * @property string $slug
  * @property string $description
  * @property array<array-key, mixed> $advantages
  * @property array<array-key, mixed> $disadvantages
  * @property \App\Models\LpgCompability $lpg
  * @property bool $turbocharger
+ * @property \App\Models\EngineLayout $engine_layout
  * @property int $valve_count
+ * @property \App\Models\EngineInjectionType $injection_type
  * @property numeric $rating
  * @property int $reliability
  * @property int $consumption
  * @property int $dynamic
+ * @property int $number_of_views
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \App\Models\EngineFuelType $fuel_type
  * @property int $power
  * @property int $brand_id
- * @property \App\Models\EngineLayout $engine_layout
- * @property-read int|null $reviews_total
- * @property-read int|null $likes
- * @property-read int|null $dislikes
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereAdvantages($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereBrandId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereConsumption($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereDisadvantages($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereDynamic($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereEngineLayout($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereFuelType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereInjectionType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereLpg($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine wherePower($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereReliability($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereTurbocharger($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Engine whereValveCount($value)
  * @property-read \App\Models\CarBrand $brand
- * @method static Builder<static>|Engine selectWithBrand()
- * @property \App\Models\EngineFuelType $fuel_type
- * @property int $number_of_views
- * @method static Builder<static>|Engine whereNumberOfViews($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $engineReviews
  * @property-read int|null $engine_reviews_count
- * @property string $slug
- * @method static Builder<static>|Engine whereSlug($value)
- * @method static Builder<static>|Engine selectWithBrandAndStats()
+ * @property-read int $likes
+ * @property-read int $dislikes
+ * @method static Builder<static>|Engine newModelQuery()
+ * @method static Builder<static>|Engine newQuery()
+ * @method static Builder<static>|Engine query()
+ * @method static Builder<static>|Engine selectByBrand(string $slug)
  * @method static Builder<static>|Engine selectDetails()
- * @property \App\Models\EngineInjectionType $injection_type
+ * @method static Builder<static>|Engine selectWithBrand()
+ * @method static Builder<static>|Engine selectWithBrandAndStats()
+ * @method static Builder<static>|Engine whereAdvantages($value)
+ * @method static Builder<static>|Engine whereBrandId($value)
+ * @method static Builder<static>|Engine whereConsumption($value)
+ * @method static Builder<static>|Engine whereCreatedAt($value)
+ * @method static Builder<static>|Engine whereDescription($value)
+ * @method static Builder<static>|Engine whereDisadvantages($value)
+ * @method static Builder<static>|Engine whereDynamic($value)
+ * @method static Builder<static>|Engine whereEngineLayout($value)
+ * @method static Builder<static>|Engine whereFuelType($value)
+ * @method static Builder<static>|Engine whereId($value)
+ * @method static Builder<static>|Engine whereInjectionType($value)
+ * @method static Builder<static>|Engine whereLpg($value)
+ * @method static Builder<static>|Engine whereName($value)
+ * @method static Builder<static>|Engine whereNumberOfViews($value)
+ * @method static Builder<static>|Engine wherePower($value)
+ * @method static Builder<static>|Engine whereRating($value)
+ * @method static Builder<static>|Engine whereReliability($value)
+ * @method static Builder<static>|Engine whereSlug($value)
+ * @method static Builder<static>|Engine whereTurbocharger($value)
+ * @method static Builder<static>|Engine whereUpdatedAt($value)
+ * @method static Builder<static>|Engine whereValveCount($value)
  * @method static Builder<static>|Engine withBrand(array $columns = [])
  * @mixin \Eloquent
  */
@@ -115,9 +114,10 @@ final class Engine extends Model
         return $this->hasMany(EngineReview::class);
     }
 
-    public function scopeSelectWithBrandAndStats(): Builder
+    public function scopeSelectWithBrandAndStats(Builder $builder): Builder
     {
-        return self::withBrand()
+        return $this
+            ->scopeWithBrand($builder)
             ->select([
                 'id',
                 'name',
@@ -140,48 +140,67 @@ final class Engine extends Model
             ]);
     }
 
-    public function scopeSelectWithBrand(): Builder
+    public function scopeSelectWithBrand(Builder $builder): Builder
     {
-        return self::withBrand()->select([
-            'id',
-            'name',
-            'power',
-            'fuel_type',
-            'number_of_views',
-            'brand_id',
-            'slug'
-        ]);
+        return $this
+            ->scopeWithBrand($builder)
+            ->select([
+                'id',
+                'name',
+                'power',
+                'fuel_type',
+                'number_of_views',
+                'brand_id',
+                'slug'
+            ]);
     }
 
-    public function scopeSelectDetails(): Builder
+    public function scopeSelectDetails(Builder $builder): Builder
     {
-        return self::withBrand()->select([
-            'id',
-            'name',
-            'description',
-            'advantages',
-            'disadvantages',
-            'fuel_type',
-            'lpg',
-            'turbocharger',
-            'engine_layout',
-            'valve_count',
-            'injection_type',
-            'rating',
-            'reliability',
-            'consumption',
-            'dynamic',
-            'number_of_views',
-            'power',
-            'slug',
-            'brand_id'
-        ]);
+        return $this
+            ->scopeWithBrand($builder)
+            ->select([
+                'id',
+                'name',
+                'description',
+                'advantages',
+                'disadvantages',
+                'fuel_type',
+                'lpg',
+                'turbocharger',
+                'engine_layout',
+                'valve_count',
+                'injection_type',
+                'rating',
+                'reliability',
+                'consumption',
+                'dynamic',
+                'number_of_views',
+                'power',
+                'slug',
+                'brand_id'
+            ]);
+    }
+
+    public function scopeSelectByBrand(Builder $builder, string $slug): Builder
+    {
+        return $builder
+            ->select([
+                'engines.name',
+                'engines.slug',
+                'engines.brand_id',
+                'engines.fuel_type'
+            ])
+            ->join('car_brands', 'engines.brand_id', '=', 'car_brands.id')
+            ->where('car_brands.slug', '=', $slug);
     }
 
     public function scopeWithBrand(Builder $builder, array $columns = ['id', 'slug', 'name', 'logo']): Builder
     {
-        return empty($columns)
-            ? $builder->with('brand')
-            : $builder->with('brand:' . implode(',', $columns));
+        if (!\in_array('id', $columns)) {
+            array_unshift($columns, 'id');
+        }
+
+        return $builder->with('brand:' . implode(',', $columns));
     }
 }

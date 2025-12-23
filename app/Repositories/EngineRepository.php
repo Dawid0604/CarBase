@@ -14,4 +14,6 @@ interface EngineRepository
     public function findPopular(): Collection;
 
     public function findDetails(string $slug): Engine;
+
+    public function findAllByBrand(string $slug): Collection;
 }

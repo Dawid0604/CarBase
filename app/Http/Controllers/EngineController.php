@@ -5,16 +5,30 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
-use App\Services\EngineService;
+use App\Services\{CarBrandService, EngineService};
 
 final class EngineController extends Controller
 {
-    public function __construct(private readonly EngineService $service) {}
+    public function __construct(
+        private readonly EngineService $engineService,
+        private readonly CarBrandService $carBrandService
+    ) {}
 
     public function details(string $slug): View
     {
         return view('engine.engine_details', [
-            'data' => $this->service->findDetails($slug)
+            'data' => $this->engineService->findDetails($slug)
+        ]);
+    }
+
+    public function list(string $slug): View
+    {
+        return view('engine.engine_list', [
+            'engines' => $this->engineService->findAllByBrand($slug),
+            'brand' => [
+                'name' => $this->carBrandService->findNameBySlug($slug)
+            ],
+            'otherBrands' => $this->carBrandService->findRandomEngines($slug)
         ]);
     }
 }

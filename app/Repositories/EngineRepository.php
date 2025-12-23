@@ -16,4 +16,6 @@ interface EngineRepository
     public function findDetails(string $slug): Engine;
 
     public function findAllByBrand(string $slug): Collection;
+
+    public function incrementNumberOfViews(string $slug): void;
 }

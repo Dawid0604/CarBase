@@ -47,4 +47,12 @@ final class EngineServiceImpl implements EngineService
             ->findAllByBrand($slug)
             ->map(EngineListDto::fromModel(...));
     }
+
+    #[Override]
+    public function incrementNumberOfViews(string $slug): void
+    {
+        $this
+            ->repository
+            ->incrementNumberOfViews($slug);
+    }
 }

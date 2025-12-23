@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 use App\Services\{CarBrandService, EngineService};
 
 final class EngineController extends Controller
@@ -16,8 +17,14 @@ final class EngineController extends Controller
 
     public function details(string $slug): View
     {
+        $engine = $this->engineService->findDetails($slug);
+
+        if (Auth::check()) {
+            $this->engineService->incrementNumberOfViews($slug);
+        }
+
         return view('engine.engine_details', [
-            'data' => $this->engineService->findDetails($slug)
+            'data' => $engine
         ]);
     }
 

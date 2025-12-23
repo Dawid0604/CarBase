@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use Override;
 use App\Models\Engine;
+use Exception, Override;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\{Config, Log};
 
 final class EngineRepositoryImpl implements EngineRepository
 {
@@ -49,5 +49,19 @@ final class EngineRepositoryImpl implements EngineRepository
         return Engine::selectByBrand($slug)
             ->orderBy('engines.name')
             ->get();
+    }
+
+    #[Override]
+    public function incrementNumberOfViews(string $slug): void
+    {
+        try {
+            Engine::whereSlug($slug)
+                ->increment('number_of_views');
+        } catch (Exception $exception) {
+            Log::warning('Failed to increment engine number of views', [
+                'slug' => $slug,
+                'error' => $exception->getMessage()
+            ]);
+        }
     }
 }

@@ -16,4 +16,6 @@ interface EngineService
     public function findDetails(string $slug): EngineDetailsDto;
 
     public function findAllByBrand(string $slug): Collection;
+
+    public function incrementNumberOfViews(string $slug): void;
 }

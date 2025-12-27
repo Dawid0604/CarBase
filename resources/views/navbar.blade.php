@@ -13,16 +13,20 @@
         <ul class="navbar-nav me-auto"></ul>
 
         <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('brand.list') }}">Silniki</a>
+            </li>
+
             @guest
                 @if (Route::has('login'))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">Zaloguj się</a>
                     </li>
                 @endif
 
                 @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="nav-link" href="{{ route('register') }}">Rejestracja</a>
                     </li>
                 @endif
             @else
@@ -35,13 +39,13 @@
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         @if (Route::has('account_edit'))
                             <a class="dropdown-item">
-                                {{ __('Edit account') }}
+                                Edytuj konto
                             </a>
                         @endif
 
                         @if (Route::has('account_reviews'))
                             <a class="dropdown-item">
-                                {{ __('Your opinions') }}
+                                Wystawione opinie
                             </a>
                         @endif
 
@@ -49,7 +53,7 @@
                             onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
 
-                            {{ __('Logout') }}
+                            Wyloguj się
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

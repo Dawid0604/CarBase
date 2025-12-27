@@ -23,14 +23,14 @@ final class EngineController extends Controller
             $this->engineService->incrementNumberOfViews($slug);
         }
 
-        return view('engine.engine_details', [
+        return view('engine.details', [
             'data' => $engine
         ]);
     }
 
     public function list(string $slug): View
     {
-        return view('engine.engine_list', [
+        return view('engine.list', [
             'engines' => $this->engineService->findAllByBrand($slug),
             'brand' => [
                 'name' => $this->carBrandService->findNameBySlug($slug)

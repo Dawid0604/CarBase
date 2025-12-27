@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\{Auth, Route};
-use App\Http\Controllers\{EngineController, FallbackController, HomeController};
+use App\Http\Controllers\{CarBrandController, EngineController, FallbackController, HomeController};
 
 Auth::routes();
 
@@ -17,6 +17,12 @@ Route::prefix('engine')->group(function () {
 
     Route::get('/list/{slug}', [EngineController::class, 'list'])
         ->name('engine.list');
+});
+
+Route::prefix('brand')->group(function () {
+
+    Route::get('/', [CarBrandController::class, 'list'])
+        ->name('brand.list');
 });
 
 Route::fallback([FallbackController::class, 'handle'])

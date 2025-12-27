@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarModel> $models
  * @property-read int|null $models_count
- * @method static Builder<static>|CarBrand findAll()
  * @method static Builder<static>|CarBrand findNameBySlug(string $slug)
  * @method static Builder<static>|CarBrand newModelQuery()
  * @method static Builder<static>|CarBrand newQuery()
@@ -28,6 +27,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder<static>|CarBrand whereSlug($value)
  * @method static Builder<static>|CarBrand whereSlugIsNotEqual(string $slug)
  * @method static Builder<static>|CarBrand whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Engine> $engines
+ * @property-read int|null $engines_count
+ * @method static Builder<static>|CarBrand orderByName()
  * @mixin \Eloquent
  */
 final class CarBrand extends Model
@@ -48,13 +50,18 @@ final class CarBrand extends Model
         return $this->hasMany(CarModel::class);
     }
 
-    public function scopeFindAll(Builder $builder): Builder
+    public function engines(): HasMany
     {
-        return $builder->select([
-            'slug',
-            'name',
-            'logo'
-        ])->orderBy('name');
+        return $this->hasMany(
+            Engine::class,
+            'brand_id',
+            'id'
+        );
+    }
+
+    public function scopeOrderByName(Builder $builder): Builder
+    {
+        return $builder->orderBy('car_brands.name');
     }
 
     public function scopeFindNameBySlug(Builder $builder, string $slug): Builder

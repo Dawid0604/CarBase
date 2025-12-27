@@ -8,7 +8,7 @@
             </li>
 
             <li class="breadcrumb-item">
-                <a href="">Silniki</a>
+                <a href="{{ route('brand.list') }}">Silniki</a>
             </li>
 
             <li class="breadcrumb-item">

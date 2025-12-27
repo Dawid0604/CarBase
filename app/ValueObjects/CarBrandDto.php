@@ -12,7 +12,8 @@ readonly class CarBrandDto
     private function __construct(
         public string $name,
         public string $logo,
-        public string $slug
+        public string $slug,
+        public int $numberOfEngines
     ) {
         if (empty($name)) {
             throw new InvalidArgumentException('Name cannot be blank');
@@ -21,6 +22,11 @@ readonly class CarBrandDto
         if (empty($slug)) {
             throw new InvalidArgumentException('Slug cannot be blank');
         }
+
+        if($numberOfEngines < 0) {
+            throw new InvalidArgumentException('Number of engines cannot be lower than 0');
+
+        }
     }
 
     public static function fromModel(CarBrand $model): self
@@ -28,7 +34,8 @@ readonly class CarBrandDto
         return new self(
             name: $model->name,
             logo: $model->logo,
-            slug: $model->slug
+            slug: $model->slug,
+            numberOfEngines: $model->engines_count
         );
     }
 }

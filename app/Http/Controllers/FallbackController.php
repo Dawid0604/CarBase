@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\{RedirectResponse, Request};
 
 final class FallbackController extends Controller
 {
-    public function handle(Request $request): View
+    public function handle(Request $request): RedirectResponse
     {
         $this->logUnknownRoute($request);
-        return view('home');
+        return redirect()->route('home');
     }
 
     private function logUnknownRoute(Request $request): void
@@ -22,7 +21,9 @@ final class FallbackController extends Controller
             "Unknown route: {$request->fullUrl()}",
             [
                 'ip' => $request->ip(),
-                'user_agent' => $request->userAgent()
+                'user_agent' => $request->userAgent(),
+                'method' => $request->method(),
+                'referer' => $request->header('referer')
             ]
         );
     }

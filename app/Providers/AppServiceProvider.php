@@ -7,8 +7,18 @@ namespace App\Providers;
 use Override;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use App\Services\{CarBrandService, CarBrandServiceImpl, EngineService, EngineServiceImpl};
-use App\Repositories\{CarBrandRepository, CarBrandRepositoryImpl, EngineRepository, EngineRepositoryImpl};
+use App\Services\{
+    CarBrandService,
+    CarBrandServiceImpl,
+    EngineService,
+    EngineServiceImpl
+};
+use App\Repositories\{
+    CarBrandRepository,
+    CarBrandRepositoryImpl,
+    EngineRepository,
+    EngineRepositoryImpl
+};
 
 final class AppServiceProvider extends ServiceProvider
 {

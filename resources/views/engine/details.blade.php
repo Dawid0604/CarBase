@@ -92,7 +92,7 @@
                             </h1>
 
                             @php
-                                $advantages = $data->technicalData['advantages'];
+                                $advantages = $data->technicalData['advantages'] ?? [];
                             @endphp
 
                             <ul>
@@ -111,7 +111,7 @@
                             </h1>
 
                             @php
-                                $disadvantages = $data->technicalData['disadvantages'];
+                                $disadvantages = $data->technicalData['disadvantages'] ?? [];
                             @endphp
 
                             <ul>
@@ -229,11 +229,30 @@
                             <div title="@guest Zaloguj się by dodać opinię @endguest"
                                 style="@auth cursor: pointer; @endauth">
 
-                                <a href="#" class="btn btn-primary btn-lg @guest disabled @endguest" role="button"
-                                    aria-disabled="@guest true @endguest">
-
+                                <button type="button" class="btn btn-primary @guest disabled @endguest"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Dodaj opinię o silniku
-                                </a>
+                                </button>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Dodaj opinię o silniku</h5>
+
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                @livewire('engine-review-form', ['engineSlug' => $data->slug])
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="btn-group btn-group-toggle my-3" data-toggle="buttons">

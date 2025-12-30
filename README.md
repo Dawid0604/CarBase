@@ -1,59 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 🚗 CarBase - System Zarządzania Pojazdami
 
-## About Laravel
+> Aplikacja webowa do zarządzania markami i modelami samochodów.
+> Projekt portfolio demonstrujący przejście Java Developer → PHP/Laravel.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[![PHP Version](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)](https://php.net)
+[![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
+[![Tests](https://img.shields.io/badge/Tests-Pest%20PHP-00E6B8?logo=pest&logoColor=white)](https://pestphp.com)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📌 Context
 
-## Learning Laravel
+Ten projekt powstał jako **demonstracja moich umiejętności** w ekosystemie PHP/Laravel. Mam **3 lata doświadczenia komercyjnego w Javie** (Spring Boot, Hibernate, Maven) i aktualnie przechodzę do PHP/Laravel, wykorzystując doświadczenie w enterprise development.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+**Dlaczego ten projekt wart uwagi:**
+- ✅ Kod pisany z perspektywą **enterprise patterns** znanych z Javy
+- ✅ Silne typowanie (PHP 8.4 strict types) - podobne do Javy
+- ✅ Testy na poziomie znanych z JUnit/Mockito
+- ✅ CI/CD pipeline (GitHub Actions) - porównywalny z Jenkins/GitLab CI
+- ✅ Dependency Injection i SOLID - koncepcje przeniesione z Spring
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🎯 O Projekcie
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**Problem biznesowy:**
+Firmy motoryzacyjne często przechowują dane o pojazdach w rozproszonych spreadsheetach lub przestarzałych systemach, co utrudnia współpracę i integrację z innymi narzędziami.
 
-### Premium Partners
+**Rozwiązanie:**
+Centralna aplikacja webowa z REST API, umożliwiająca:
+- Zarządzanie markami i modelami pojazdów
+- Łatwą integrację z istniejącymi systemami (API-first approach)
+- Współpracę zespołową z audytem zmian
+- Szybkie wyszukiwanie i filtrowanie danych
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+**Wartość biznesowa:**
+- 🚀 Skrócenie czasu dostępu do danych z minut do sekund
+- 🔒 Centralizacja wiedzy - jedno źródło prawdy
+- 🔗 Gotowość do integracji z CRM, ERP, aplikacjami mobilnymi
+- 📊 Możliwość raportowania i analizy danych
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Stack Technologiczny
 
-## Code of Conduct
+### Backend
+| Technologia | Wersja |
+|-------------|--------|
+| **PHP** | 8.4 |
+| **Laravel** | 12 |
+| **Eloquent ORM** | 12 |
+| **MySQL** | 8.0.36 | MySQL |
+| **Bootstrap** | 5 |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Jakość Kodu & Testowanie
+| Narzędzie | Cel |
+|-----------|-----|
+| **Pest PHP** | Testing framework |
+| **PHPStan** | Statyczna analiza |
+| **Psalm** | Type checker  |
+| **PHPMD** | Code smells  |
 
-## Security Vulnerabilities
+### DevOps & Narzędzia
+- **GitHub Actions** - CI/CD pipeline
+- **Composer** - zarządzanie zależnościami
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Wzorce i Praktyki
+- ✅ **Repository Pattern** - abstrakcja warstwy danych
+- ✅ **Service Layer** - logika biznesowa oddzielona od kontrolerów
+- ✅ **Value Objects** - niezmienne obiekty domenowe (DDD)
+- ✅ **DTOs** - transfer danych między warstwami
+- ✅ **Dependency Injection** - przez konstruktor
+- ✅ **SOLID**
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## ✨ Funkcjonalności
+
+### Zaimplementowane
+- ✅ **Marki** - Wyświetlanie wszystkich marek
+- ✅ **Silniki - list** - Wyświetlanie wszystkich silników danej marki
+- ✅ **Silniki - details** - Wyświetlanie wszystkich szczegółów danego silnika
+- ✅ **Silniki - user review form** - przygotowany formularz do tworzenia opinii silnika
+- ✅ **Automatyczne generowanie slug'ów** - SEO-friendly URLs
+- ✅ **Walidacja na wielu poziomach** - Form Requests, DTOs, Value Objects
+
+### W Roadmapie
+- 🔲 **Database Transactions** - ACID compliance
+- 🔲 **System ról i uprawnień** - Admin, Manager, User
+- 🔲 **REST API z dokumentacją** - OpenAPI/Swagger
+- 🔲 **Eksport danych** - CSV, Excel, PDF
+- 🔲 **Cache layer** - Redis
+- 🔲 **Queue/Jobs** - asynchroniczne przetwarzanie
+- 🔲 **E2E tests** - testy E2E
+- 🔲 **Connection pool** - optymalizacja połączeń bazodanowych
+- 🔲 **Utworzenie katalogu z konfiguracją PHP** - zawrzeć tam gotowe configi dla dev, prod oraz zoptymalizować intepreter PHP (np. opcache)

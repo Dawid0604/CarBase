@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\CarType;
 use Illuminate\Database\Eloquent\{Builder, Model};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
-
 
 /**
  * @property int $id
@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
  * @property int $production_from
  * @property int|null $production_to
  * @property string|null $image
- * @property \App\Models\CarType $type Car segment: A=mini, B=small, C=medium, D=large, E=executive, F=luxury
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarEngine> $engines
@@ -37,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
  * @method static Builder<static>|CarGeneration whereSlug($value)
  * @method static Builder<static>|CarGeneration whereType($value)
  * @method static Builder<static>|CarGeneration whereUpdatedAt($value)
+ * @property CarType $type Car segment: A=mini, B=small, C=medium, D=large, E=executive, F=luxury
  * @mixin \Eloquent
  */
 final class CarGeneration extends Model

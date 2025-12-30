@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\ValueObjects;
 
-use App\Models\{Engine, EngineFuelType};
+use App\Models\Engine;
+use App\Enums\EngineFuelType;
 
 readonly class EngineListDto
 {

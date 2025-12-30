@@ -75,3 +75,6 @@ jobs:
 
       - name: Run Psalm
         run: ./vendor/bin/psalm --show-info=false
+
+      - name: Run Tests
+        run: ./vendor/bin/pest

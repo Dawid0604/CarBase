@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\UserRole;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
-
 
 /**
  * @property int $id
@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $nickname
  * @property string|null $avatar
- * @property \App\Models\UserRole $role
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EngineReview> $engineReviews
  * @property-read int|null $engine_reviews_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarGenerationReview> $generationsReviews
@@ -43,6 +42,7 @@ use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ * @property UserRole $role
  * @mixin \Eloquent
  */
 final class User extends Authenticatable

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Casts\MysqlSetCast;
+use App\Enums\CarTimingBeltType;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
 
 /**
  * @property int $id
@@ -22,7 +21,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $oil_grade
  * @property numeric $oil_capacity
  * @property array<array-key, mixed>|null $oil_change_interval
- * @property \App\Models\CarTimingBeltType $timing_belt_type
  * @property array<array-key, mixed>|null $timing_belt_change_interval
  * @property int|null $acceleration
  * @property int|null $max_speed
@@ -66,6 +64,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereTransmissionTypes($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CarEngine whereViewsCount($value)
+ * @property CarTimingBeltType $timing_belt_type
  * @mixin \Eloquent
  */
 final class CarEngine extends Model

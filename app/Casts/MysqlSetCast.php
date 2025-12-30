@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace App\Casts;
 
-use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Illuminate\Database\Eloquent\Model;
 use Override;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 /**
  * @implements CastsAttributes<array, string|array|null>
  */
 final class MysqlSetCast implements CastsAttributes
 {
+    private const string ARRAY_SEPARATOR = ',';
+
     /**
      * Cast the given value.
      *
@@ -23,7 +25,7 @@ final class MysqlSetCast implements CastsAttributes
     #[Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): array
     {
-        return empty($value) ? [] : explode(',', $value);
+        return empty($value) ? [] : self::removeEmptyParams(explode(self::ARRAY_SEPARATOR, $value));
     }
 
     /**
@@ -36,14 +38,17 @@ final class MysqlSetCast implements CastsAttributes
     #[Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): ?string
     {
-        $preparedValue = $value;
-
-        if ($value === null) {
-            $preparedValue = null;
+        if ($value === null || $value === '' || empty($value)) {
+            return null;
         } elseif (\is_array($value)) {
-            $preparedValue = implode(',', $value);
+            return implode(self::ARRAY_SEPARATOR, self::removeEmptyParams($value));
         }
 
-        return (string) $preparedValue;
+        return (string) $value;
+    }
+
+    private static function removeEmptyParams(array $value): array
+    {
+        return array_filter($value, fn($val) => trim($val) !== '');
     }
 }

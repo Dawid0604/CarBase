@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\{Builder, Model};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use App\Enums\{EngineFuelType, EngineInjectionType, EngineLayout, LpgCompability};
 
 /**
  * @property int $id
@@ -14,11 +15,8 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
  * @property string $description
  * @property array<array-key, mixed> $advantages
  * @property array<array-key, mixed> $disadvantages
- * @property \App\Models\LpgCompability $lpg
  * @property bool $turbocharger
- * @property \App\Models\EngineLayout $engine_layout
  * @property int $valve_count
- * @property \App\Models\EngineInjectionType $injection_type
  * @property numeric $rating
  * @property int $reliability
  * @property int $consumption
@@ -26,7 +24,6 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
  * @property int $number_of_views
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \App\Models\EngineFuelType $fuel_type
  * @property int $power
  * @property int $brand_id
  * @property-read \App\Models\CarBrand $brand
@@ -63,6 +60,10 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
  * @method static Builder<static>|Engine whereUpdatedAt($value)
  * @method static Builder<static>|Engine whereValveCount($value)
  * @method static Builder<static>|Engine withBrand(array $columns = [])
+ * @property LpgCompability $lpg
+ * @property EngineLayout $engine_layout
+ * @property EngineInjectionType $injection_type
+ * @property EngineFuelType $fuel_type
  * @mixin \Eloquent
  */
 final class Engine extends Model

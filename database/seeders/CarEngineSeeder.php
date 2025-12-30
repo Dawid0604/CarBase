@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\CarEngine;
-use App\Models\CarTimingBeltType;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\CarEngine;
 use Illuminate\Database\Seeder;
+use App\Enums\CarTimingBeltType;
 
 final class CarEngineSeeder extends Seeder
 {
@@ -424,7 +423,7 @@ final class CarEngineSeeder extends Seeder
                 'engine_id' => $engine['engine_id'],
                 'name' => $engine['name'],
                 'displacement' => $engine['displacement'],
-                'power'=> $engine['power'],
+                'power' => $engine['power'],
                 'torque' => $engine['torque'],
                 'transmission_types' => $engine['transmission_types'],
                 'drive_types' => $engine['drive_types'],
@@ -448,6 +447,5 @@ final class CarEngineSeeder extends Seeder
         $this
             ->command
             ->info('Successfully imported ' . \count($carEngines) . ' carEngines');
-
     }
 }

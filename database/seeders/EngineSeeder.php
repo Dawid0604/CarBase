@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\EngineFuelType;
-use App\Models\Engine;
-use App\Models\EngineInjectionType;
-use App\Models\EngineLayout;
-use App\Models\LpgCompability;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Engine;
 use Illuminate\Database\Seeder;
+use App\Enums\{EngineFuelType, EngineInjectionType, EngineLayout, LpgCompability};
 
 final class EngineSeeder extends Seeder
 {

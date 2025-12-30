@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\CarGeneration;
-use App\Models\CarModel;
-use App\Models\CarType;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\CarType;
+use App\Models\CarGeneration;
 use Illuminate\Database\Seeder;
 
 final class CarGenerationSeeder extends Seeder

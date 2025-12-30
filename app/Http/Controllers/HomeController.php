@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Services\{CarBrandService, EngineService};
 use Illuminate\View\View;
+use App\Services\{CarBrandService, EngineService};
 
 final class HomeController extends Controller
 {

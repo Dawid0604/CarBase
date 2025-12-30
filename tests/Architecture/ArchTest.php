@@ -16,7 +16,8 @@ arch('models are used only in repositories')
         'App\Repositories',
         'Database\Seeders',
         'App\ValueObjects',
-        'App\Models'
+        'App\Models',
+        'Database\Factories'
     ])
     ->ignoring([
         'App\Services\UserServiceImpl',

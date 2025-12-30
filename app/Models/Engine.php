@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{Builder, Model};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model};
 use App\Enums\{EngineFuelType, EngineInjectionType, EngineLayout, LpgCompability};
 
 /**
@@ -64,10 +64,14 @@ use App\Enums\{EngineFuelType, EngineInjectionType, EngineLayout, LpgCompability
  * @property EngineLayout $engine_layout
  * @property EngineInjectionType $injection_type
  * @property EngineFuelType $fuel_type
+ * @method static \Database\Factories\EngineFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 final class Engine extends Model
 {
+    /** @use HasFactory<\Database\Factories\EngineFactory> */
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'description',

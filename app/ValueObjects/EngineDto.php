@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\ValueObjects;
 
 use App\Models\Engine;
-use InvalidArgumentException;
 
 readonly class EngineDto
 {
@@ -16,24 +15,7 @@ readonly class EngineDto
         public array $brand,
         public array $stats,
         public string $slug
-    ) {
-
-        if (empty($name)) {
-            throw new InvalidArgumentException('Name cannot be blank');
-        }
-
-        if (empty($brand)) {
-            throw new InvalidArgumentException('Brand cannot be empty array');
-        }
-
-        if(empty($brand['name'])) {
-            throw new InvalidArgumentException('Brand name cannot be empty');
-        }
-
-        if (empty($slug)) {
-            throw new InvalidArgumentException('Slug cannot be blank');
-        }
-    }
+    ) {}
 
     public static function fromModel(Engine $model): self
     {

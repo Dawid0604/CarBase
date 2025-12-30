@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{Builder, Model};
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model};
 
 /**
  * @property int $id
@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Engine> $engines
- * @property-read int|null $engines_count
+ * @property int|null $engines_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarModel> $models
  * @property-read int|null $models_count
  * @method static Builder<static>|CarBrand findNameBySlug(string $slug)
@@ -30,10 +30,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder<static>|CarBrand whereSlug($value)
  * @method static Builder<static>|CarBrand whereSlugIsNotEqual(string $slug)
  * @method static Builder<static>|CarBrand whereUpdatedAt($value)
+ * @method static \Database\Factories\CarBrandFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 final class CarBrand extends Model
 {
+    /** @use HasFactory<\Database\Factories\CarBrandFactory> */
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'logo',

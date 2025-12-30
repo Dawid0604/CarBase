@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum EngineFuelType: string
+use Override;
+
+enum EngineFuelType: string implements HasTranslatedName
 {
     case GASOLINE = 'GASOLINE';
     case DIESEL = 'DIESEL';
     case HYBRID = 'HYBRID';
     case ELECTRIC = 'ELECTRIC';
 
+    #[Override]
     public function getTranslatedName(): string
     {
         return match ($this) {
@@ -23,7 +26,7 @@ enum EngineFuelType: string
 
     public function getBackgroundColor(): string
     {
-        return match($this) {
+        return match ($this) {
             EngineFuelType::GASOLINE => 'gradient-gasoline',
             EngineFuelType::DIESEL => 'gradient-diesel',
             EngineFuelType::HYBRID => 'gradient-hybrid',

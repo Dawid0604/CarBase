@@ -61,3 +61,8 @@ arch('value objects are readonly')
     ->expect('App\ValueObjects')
     ->classes()
     ->toBeReadonly();
+
+arch('enums are only in enums')
+    ->expect('App\Enums')
+    ->toBeEnums()
+    ->ignoring('App\Enums\HasTranslatedName');

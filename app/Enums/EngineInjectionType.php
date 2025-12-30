@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum EngineInjectionType: string
+use Override;
+
+enum EngineInjectionType: string implements HasTranslatedName
 {
     case DIRECT = 'DIRECT';
     case INDIRECT = 'INDIRECT';
     case MULTIPOINT = 'MULTIPOINT';
     case COMMON_RAIL = 'COMMON_RAIL';
 
+    #[Override]
     public function getTranslatedName(): string
     {
-        return match($this) {
+        return match ($this) {
             EngineInjectionType::DIRECT => 'Bezpośredni',
             EngineInjectionType::INDIRECT => 'Pośredni',
             EngineInjectionType::MULTIPOINT => 'Wielopunktowy',

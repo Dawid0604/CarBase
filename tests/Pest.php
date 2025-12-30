@@ -42,3 +42,30 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+function itHasUniqueEnumValues(string $enumClassTarget): void
+{
+    describe('has unique case labels', function () use ($enumClassTarget): void {
+        // Arrange
+        $labels = array_map(fn($val) => $val->value, $enumClassTarget::cases());
+
+        // Act
+        // Assert
+        expect($labels)->toHaveCount(count(array_unique($labels)));
+    });
+}
+
+function itHasValidTranslatedName(string $enumClassTarget): void
+{
+    it('returns valid values', function () use ($enumClassTarget): void {
+        // Arrange
+        $values = array_map(fn($val): string => $val->getTranslatedName(), $enumClassTarget::cases());
+
+        // Act
+        // Assert
+        expect($values)
+            ->each
+            ->not()->toBeNull()
+            ->not()->toBe('')
+            ->toBeString();
+    });
+}

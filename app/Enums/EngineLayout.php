@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum EngineLayout: string
+use Override;
+
+enum EngineLayout: string implements HasTranslatedName
 {
     case THREE = '3';
     case FOUR = '4';
@@ -14,6 +16,7 @@ enum EngineLayout: string
     case V10 = 'V10';
     case V12 = 'V12';
 
+    #[Override]
     public function getTranslatedName(): string
     {
         return match ($this) {

@@ -9,7 +9,7 @@ describe('CarBrandDto tests', function (): void {
 
     it('maps values properly', function (?int $enginesCount, int $expectedEnginesCount): void {
         // Arrange
-        $model = CarBrand::factory()->create();
+        $model = CarBrand::factory()->make();
         $model->engines_count = $enginesCount;
 
         // Act

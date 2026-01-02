@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-use App\Models\Engine;
 use App\ValueObjects\EngineDto;
+use App\Models\{CarBrand, Engine};
 
 describe('EngineDto tests', function (): void {
 
     it('maps values properly', function (): void {
         // Arrange
-        $model = Engine::factory()->create();
+        $brand = CarBrand::factory()->make();
+        $model = Engine::factory()
+            ->make(['brand_id' => $brand])
+            ->setRelation('brand', $brand);
 
         // Act
         $result = EngineDto::fromModel($model);

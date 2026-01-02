@@ -191,6 +191,7 @@ final class Engine extends Model
     {
         return $builder
             ->select([
+                'engines.id',
                 'engines.name',
                 'engines.slug',
                 'engines.brand_id',

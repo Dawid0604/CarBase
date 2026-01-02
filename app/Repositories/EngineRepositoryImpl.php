@@ -19,7 +19,6 @@ final class EngineRepositoryImpl implements EngineRepository
         return Engine::selectWithBrand()
             ->limit($numberOfRows)
             ->orderByDesc('engines.id')
-            ->orderBy('engines.name')
             ->get();
     }
 
@@ -54,13 +53,13 @@ final class EngineRepositoryImpl implements EngineRepository
     #[Override]
     public function incrementNumberOfViews(string $slug): void
     {
-        try {
-            Engine::whereSlug($slug)->increment('number_of_views');
-        } catch (Exception $exception) {
-            Log::warning('Failed to increment engine number of views', [
-                'slug' => $slug,
-                'error' => $exception->getMessage()
-            ]);
+        $affectedRows = Engine::whereSlug($slug)->increment('number_of_views');
+
+        if ($affectedRows === 0) {
+            Log::warning(
+                'Attempted to increment number_of_views for non existent engine',
+                ['slug' => $slug]
+            );
         }
     }
 }

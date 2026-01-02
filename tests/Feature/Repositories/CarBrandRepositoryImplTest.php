@@ -20,11 +20,11 @@ describe('CarBrandRepositoryImpl tests', function () {
 
             Engine::factory()
                 ->count(3)
-                ->create(['brand_id' => $brand1->id]);
+                ->create(['brand_id' => $brand1]);
 
             Engine::factory()
                 ->count(2)
-                ->create(['brand_id' => $brand2->id]);
+                ->create(['brand_id' => $brand2]);
 
             // Act
             $brands = findAll();

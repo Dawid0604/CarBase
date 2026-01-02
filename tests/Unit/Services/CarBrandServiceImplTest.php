@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+use Tests\TestCase;
 use App\Models\CarBrand;
 use App\ValueObjects\CarBrandDto;
 use Illuminate\Support\Collection;
 use App\Services\CarBrandServiceImpl;
 use App\Repositories\CarBrandRepository;
-use Tests\TestCase;
 
 describe('CarBrandServiceImpl tests', function () {
 

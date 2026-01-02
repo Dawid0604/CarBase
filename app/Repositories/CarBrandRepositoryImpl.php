@@ -29,14 +29,20 @@ final class CarBrandRepositoryImpl implements CarBrandRepository
     #[Override]
     public function findRandomEngines(string $slug, int $numberOfRows): Collection
     {
-        $ids = CarBrand::pluck('id')->toArray();
-
-        if (\count($ids) <= $numberOfRows) {
-            return CarBrand::whereSlugIsNotEqual($slug)
-                ->get();
+        if ($numberOfRows <= 0) {
+            return new Collection();
         }
 
-        $randomIds = array_rand(array_flip($ids), $numberOfRows);
+        $ids = CarBrand::pluck('id')->toArray();
+
+        if (empty($ids)) {
+            return new Collection();
+        }
+
+        $fixedNumberOfRows = min($numberOfRows, \count($ids));
+        $randomIds = array_rand(array_flip($ids), $fixedNumberOfRows);
+        $randomIds = \is_array($randomIds) ? $randomIds : [$randomIds];
+
         return CarBrand::whereIn('id', $randomIds)
             ->whereSlugIsNotEqual($slug)
             ->get();

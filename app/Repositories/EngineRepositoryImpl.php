@@ -55,8 +55,7 @@ final class EngineRepositoryImpl implements EngineRepository
     public function incrementNumberOfViews(string $slug): void
     {
         try {
-            Engine::whereSlug($slug)
-                ->increment('number_of_views');
+            Engine::whereSlug($slug)->increment('number_of_views');
         } catch (Exception $exception) {
             Log::warning('Failed to increment engine number of views', [
                 'slug' => $slug,

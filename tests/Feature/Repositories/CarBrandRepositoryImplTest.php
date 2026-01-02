@@ -85,7 +85,7 @@ describe('CarBrandRepositoryImpl tests', function () {
 
         function findAll(): Collection
         {
-            return getRepository()->findAll();
+            return getCarBrandRepository()->findAll();
         }
     });
 
@@ -129,7 +129,7 @@ describe('CarBrandRepositoryImpl tests', function () {
 
         function findNameBySlug(string $slug): string
         {
-            return getRepository()->findNameBySlug($slug);
+            return getCarBrandRepository()->findNameBySlug($slug);
         }
     });
 
@@ -192,12 +192,12 @@ describe('CarBrandRepositoryImpl tests', function () {
 
         function findRandomEngines(string $slug, int $numberOfRows): Collection
         {
-            return getRepository()->findRandomEngines($slug, $numberOfRows);
+            return getCarBrandRepository()->findRandomEngines($slug, $numberOfRows);
         }
     });
-});
 
-function getRepository(): CarBrandRepository
-{
-    return App::make(CarBrandRepository::class);
-}
+    function getCarBrandRepository(): CarBrandRepository
+    {
+        return App::make(CarBrandRepository::class);
+    }
+});

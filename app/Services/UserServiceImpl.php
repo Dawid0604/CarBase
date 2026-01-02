@@ -7,6 +7,7 @@ namespace App\Services;
 use Override;
 use App\Models\User;
 use App\Repositories\UserRepository;
+use App\ValueObjects\CreateUserDto;
 
 final class UserServiceImpl implements UserService
 {
@@ -17,6 +18,8 @@ final class UserServiceImpl implements UserService
     #[Override]
     public function create(array $data): User
     {
-        return $this->userRepository->create($data);
+        return $this
+            ->userRepository
+            ->create(CreateUserDto::fromArray($data));
     }
 }

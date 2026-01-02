@@ -6,7 +6,7 @@ namespace App\ValueObjects;
 
 use App\Models\Engine;
 
-readonly class EngineDetailsDto
+final readonly class EngineDetailsDto
 {
     private function __construct(
         public string $name,

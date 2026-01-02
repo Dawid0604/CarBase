@@ -7,7 +7,7 @@ namespace App\ValueObjects;
 use App\Models\Engine;
 use App\Enums\EngineFuelType;
 
-readonly class EngineListDto
+final readonly class EngineListDto
 {
     private function __construct(
         public string $name,

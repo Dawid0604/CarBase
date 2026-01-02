@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\User;
+use App\ValueObjects\CreateUserDto;
 
 interface UserRepository
 {
-    public function create(array $data): User;
+    public function create(CreateUserDto $data): User;
 }

@@ -6,7 +6,7 @@ namespace App\ValueObjects;
 
 use App\Models\CarBrand;
 
-readonly class CarBrandDto
+final readonly class CarBrandDto
 {
     private function __construct(
         public string $name,

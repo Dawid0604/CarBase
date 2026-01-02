@@ -11,17 +11,17 @@ use Illuminate\Support\Facades\{Auth, Session};
 
 final class EngineReviewForm extends Component
 {
-    public string $comment = '';
+    public string $comment;
 
-    public int $rating = 0;
+    public int $rating;
 
-    public int $reliability = 0;
+    public int $reliability;
 
-    public int $consumption = 0;
+    public int $consumption;
 
-    public int $dynamic = 0;
+    public int $dynamic;
 
-    public bool $recommendation = false;
+    public bool $recommendation;
 
     public string $engineSlug;
 
@@ -31,24 +31,33 @@ final class EngineReviewForm extends Component
         'reliability' => 'required|integer|min:1|max:5',
         'consumption' => 'required|integer|min:1|max:5',
         'dynamic' => 'required|integer|min:1|max:5',
-        'recommendation' => 'required|boolean'
+        'recommendation' => 'required|boolean',
+        'engineSlug' => 'required|string|min:1'
     ];
 
-    private const string STAR_FIELD_MIN_MESSAGE = 'Wypełnij to pole';
+    private const string STAR_FIELD_MIN_MESSAGE = 'Oceń';
+    private const string REQUIRED_FIELD_MESSAGE = 'To pole jest wymagane';
     private const string STAR_FIELD_MAX_MESSAGE = 'Maksymalna ilość gwiazdek wynosi 5';
 
     protected $messages = [
-        'comment.max' => 'Opinia nie powinna być dłuższa niż 1000 znaków',
+        'rating.required' => self::REQUIRED_FIELD_MESSAGE,
+        'reliability.required' => self::REQUIRED_FIELD_MESSAGE,
+        'consumption.required' => self::REQUIRED_FIELD_MESSAGE,
+        'dynamic.required' => self::REQUIRED_FIELD_MESSAGE,
+        'recommentation.required' => self::REQUIRED_FIELD_MESSAGE,
+        'engineSlug.required' => self::REQUIRED_FIELD_MESSAGE,
 
         'rating.min' => self::STAR_FIELD_MIN_MESSAGE,
         'reliability.min' => self::STAR_FIELD_MIN_MESSAGE,
         'consumption.min' => self::STAR_FIELD_MIN_MESSAGE,
         'dynamic.min' => self::STAR_FIELD_MIN_MESSAGE,
+        'engineSlug.min' => self::STAR_FIELD_MIN_MESSAGE,
 
         'rating.max' => self::STAR_FIELD_MAX_MESSAGE,
         'reliability.max' => self::STAR_FIELD_MAX_MESSAGE,
         'consumption.max' => self::STAR_FIELD_MAX_MESSAGE,
         'dynamic.max' => self::STAR_FIELD_MAX_MESSAGE,
+        'comment.max' => 'Opinia nie powinna być dłuższa niż 1000 znaków',
 
         'recommendation.required' => 'Rekomendacja jest wymagana'
     ];

@@ -25,7 +25,7 @@ final class CarBrandFactory extends Factory
 
         return [
             'name' => $name,
-            'logo' => fake()->imageUrl(),
+            'logo' => 'anyDomain?randomId=' . fake()->numberBetween(),
             'slug' => $slug
         ];
     }

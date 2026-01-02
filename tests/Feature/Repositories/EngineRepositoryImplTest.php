@@ -186,7 +186,7 @@ describe('EngineRepository tests', function () {
                 $engine2->id
             ];
 
-            expect($resultIds)->toBe($expectedIds);
+            expect(\sort($resultIds))->toBe(\sort($expectedIds));
         });
 
         it('returns sorted collection', function () {

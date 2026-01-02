@@ -38,6 +38,7 @@ final class CarBrandServiceImpl implements CarBrandService
 
         return $this
             ->repository
-            ->findRandomEngines($slug, $numberOfRows);
+            ->findRandomEngines($slug, $numberOfRows)
+            ->map(CarBrandDto::fromModel(...));
     }
 }

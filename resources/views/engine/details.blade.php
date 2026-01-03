@@ -274,7 +274,7 @@
                                     <i class="bi bi-hand-thumbs-down-fill"></i>
                                     Negatywne (0)
                                 </label>
-                            </div>>
+                            </div>
                         </div>
 
                         <div class="row py-4 mx-auto">

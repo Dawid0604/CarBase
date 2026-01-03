@@ -57,9 +57,7 @@ final class EngineReviewForm extends Component
         'reliability.max' => self::STAR_FIELD_MAX_MESSAGE,
         'consumption.max' => self::STAR_FIELD_MAX_MESSAGE,
         'dynamic.max' => self::STAR_FIELD_MAX_MESSAGE,
-        'comment.max' => 'Opinia nie powinna być dłuższa niż 1000 znaków',
-
-        'recommendation.required' => 'Rekomendacja jest wymagana'
+        'comment.max' => 'Opinia nie powinna być dłuższa niż 1000 znaków'
     ];
 
     public function render(): View

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <!-- Scripts -->
-    @env(['production'])
+    @env(['production', 'local'])
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @livewireStyles
     @endenv
@@ -28,7 +28,7 @@
         </main>
     </div>
 
-    @env(['production'])
+    @env(['production', 'local'])
         @livewireScripts
     @endenv
 </body>

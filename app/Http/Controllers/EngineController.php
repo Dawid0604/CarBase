@@ -38,4 +38,11 @@ final class EngineController extends Controller
             'otherBrands' => $this->carBrandService->findRandomEngines($slug)
         ]);
     }
+
+    public function brandList(): View
+    {
+        return view('engine.brand-list', [
+            'brands' => $this->carBrandService->findAll()
+        ]);
+    }
 }

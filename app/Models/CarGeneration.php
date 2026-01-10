@@ -5,8 +5,14 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\CarType;
-use Illuminate\Database\Eloquent\{Builder, Model};
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
+use Illuminate\Database\Eloquent\{
+    Builder, Factories\HasFactory,
+    Model
+};
+use Illuminate\Database\Eloquent\Relations\{
+    BelongsTo,
+    BelongsToMany
+};
 
 /**
  * @property int $id
@@ -37,10 +43,14 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
  * @method static Builder<static>|CarGeneration whereType($value)
  * @method static Builder<static>|CarGeneration whereUpdatedAt($value)
  * @property CarType $type Car segment: A=mini, B=small, C=medium, D=large, E=executive, F=luxury
+ * @method static \Database\Factories\CarGenerationFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 final class CarGeneration extends Model
 {
+    /** @use HasFactory<\Database\Factories\CarGenerationFactory> */
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'production_from',
@@ -60,12 +70,11 @@ final class CarGeneration extends Model
 
     public function model(): BelongsTo
     {
-        return $this->belongsTo(CarModel::class);
-    }
-
-    public function getFullName(): string
-    {
-        return $this->model->name . ' ' . $this->name;
+        return $this->belongsTo(
+            CarModel::class,
+            'model_id',
+            'id'
+        );
     }
 
     public function scopeJoinWithBrand(Builder $builder): Builder

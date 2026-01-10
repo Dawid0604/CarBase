@@ -11,9 +11,17 @@ use Illuminate\Support\Collection;
 final class CarBrandRepositoryImpl implements CarBrandRepository
 {
     #[Override]
-    public function findAll(): Collection
+    public function findAllWithEngines(): Collection
     {
         return CarBrand::withCount('engines')
+            ->orderByName()
+            ->get();
+    }
+
+    #[Override]
+    public function findAllWithCarModels(): Collection
+    {
+        return CarBrand::withCount('models')
             ->orderByName()
             ->get();
     }
@@ -39,8 +47,8 @@ final class CarBrandRepositoryImpl implements CarBrandRepository
             return new Collection();
         }
 
-        $fixedNumberOfRows = min($numberOfRows, \count($ids));
-        $randomIds = array_rand(array_flip($ids), $fixedNumberOfRows);
+        $fixedNumberOfRows = \min($numberOfRows, \count($ids));
+        $randomIds = \array_rand(\array_flip($ids), $fixedNumberOfRows);
         $randomIds = \is_array($randomIds) ? $randomIds : [$randomIds];
 
         return CarBrand::whereIn('id', $randomIds)

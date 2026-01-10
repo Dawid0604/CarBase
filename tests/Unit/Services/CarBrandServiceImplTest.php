@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 use Tests\TestCase;
 use App\Models\CarBrand;
-use App\ValueObjects\CarBrandDto;
 use Illuminate\Support\Collection;
 use App\Services\CarBrandServiceImpl;
 use App\Repositories\CarBrandRepository;
+use App\ValueObjects\Brand\{
+    CarBrandEngineDto,
+    CarBrandModelDto
+};
 
 describe('CarBrandServiceImpl tests', function () {
 
-    describe('findAll() tests', function () {
+    describe('findAllWithEngines() tests', function () {
 
         it('returns collection', function () {
             // Arrange
@@ -25,19 +28,19 @@ describe('CarBrandServiceImpl tests', function () {
             $service = new CarBrandServiceImpl($repository);
 
             $repository
-                ->shouldReceive('findAll')
+                ->shouldReceive('findAllWithEngines')
                 ->once()
                 ->andReturn($data);
 
             // Act
-            $result = $service->findAll();
+            $result = $service->findAllWithEngines();
 
             // Assert
             expect($result)->toBeInstanceOf(Collection::class);
             expect($result)
                 ->toHaveCount(\count($data))
                 ->each
-                ->toBeInstanceOf(CarBrandDto::class);
+                ->toBeInstanceOf(CarBrandEngineDto::class);
         });
 
         it('returns empty collection', function () {
@@ -46,12 +49,61 @@ describe('CarBrandServiceImpl tests', function () {
             $service = new CarBrandServiceImpl($repository);
 
             $repository
-                ->shouldReceive('findAll')
+                ->shouldReceive('findAllWithEngines')
                 ->once()
                 ->andReturn(new Collection());
 
             // Act
-            $result = $service->findAll();
+            $result = $service->findAllWithEngines();
+
+            // Assert
+            expect($result)
+                ->toBeInstanceOf(Collection::class)
+                ->toBeEmpty();
+        });
+    });
+
+    describe('findAllWithCarModels() tests', function () {
+
+        it('returns collection', function () {
+            // Arrange
+            $data = collect([
+                CarBrand::factory()->make(),
+                CarBrand::factory()->make(),
+                CarBrand::factory()->make()
+            ]);
+
+            $repository = Mockery::mock(CarBrandRepository::class);
+            $service = new CarBrandServiceImpl($repository);
+
+            $repository
+                ->shouldReceive('findAllWithCarModels')
+                ->once()
+                ->andReturn($data);
+
+            // Act
+            $result = $service->findAllWithCarModels();
+
+            // Assert
+            expect($result)->toBeInstanceOf(Collection::class);
+            expect($result)
+                ->toHaveCount(\count($data))
+                ->each
+                ->toBeInstanceOf(CarBrandModelDto::class);
+        });
+
+        it('returns empty collection', function () {
+            // Arrange
+            $repository = Mockery::mock(CarBrandRepository::class);
+            $service = new CarBrandServiceImpl($repository);
+
+            $repository
+                ->shouldReceive('findAllWithCarModels')
+                ->once()
+                ->andReturn(new Collection());
+
+            // Act
+            $result = $service->findAllWithCarModels();
 
             // Assert
             expect($result)
@@ -116,7 +168,7 @@ describe('CarBrandServiceImpl tests', function () {
             expect($result)
                 ->toHaveCount(\count($data))
                 ->each
-                ->toBeInstanceOf(CarBrandDto::class);
+                ->toBeInstanceOf(CarBrandEngineDto::class);
         });
 
         it('returns empty collection', function () {

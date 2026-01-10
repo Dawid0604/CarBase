@@ -12,12 +12,13 @@ final class HomeController extends Controller
     public function __construct(
         private readonly CarBrandService $brandService,
         private readonly EngineService $engineService
-    ) {}
+    ) {
+    }
 
     public function index(): View
     {
         return view('home', [
-            'brands' => $this->brandService->findAll(),
+            'brands' => $this->brandService->findAllWithEngines(),
             'engines' => [
                 'popular' => $this->engineService->findPopular(),
                 'newest' => $this->engineService->findNewest()

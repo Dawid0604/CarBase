@@ -13,6 +13,8 @@ final class ServiceImplProvider extends ServiceProvider
         \App\Services\CarBrandService::class => \App\Services\CarBrandServiceImpl::class,
         \App\Services\EngineService::class => \App\Services\EngineServiceImpl::class,
         \App\Services\UserService::class => \App\Services\UserServiceImpl::class,
+        \App\Services\CarModelService::class => \App\Services\CarModelServiceImpl::class,
+        \App\Services\CarGenerationService::class => \App\Services\CarGenerationServiceImpl::class
     ];
 
     /**

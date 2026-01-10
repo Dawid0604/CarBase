@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ValueObjects;
+namespace App\ValueObjects\Engine;
 
 use App\Models\Engine;
 
@@ -16,7 +16,8 @@ final readonly class EngineDetailsDto
         public array $stats,
         public array $rating,
         public array $brand
-    ) {}
+    ) {
+    }
 
     public static function fromModel(Engine $engine): self
     {

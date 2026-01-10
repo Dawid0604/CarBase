@@ -3,21 +3,21 @@
 declare(strict_types=1);
 
 use App\Models\CarBrand;
-use App\ValueObjects\CarBrandDto;
+use App\ValueObjects\Brand\CarBrandEngineDto;
 
-describe('CarBrandDto tests', function (): void {
+describe('CarBrandEngineDto tests', function (): void {
 
     it('maps values properly', function (?int $enginesCount, int $expectedEnginesCount): void {
         // Arrange
         $model = CarBrand::factory()->make();
-        $model->engines_count = $enginesCount;
+        $model->setAttribute('engines_count', $enginesCount);
 
         // Act
-        $result = CarBrandDto::fromModel($model);
+        $result = CarBrandEngineDto::fromModel($model);
 
         // Assert
         expect($result)
-            ->toBeInstanceOf(CarBrandDto::class)
+            ->toBeInstanceOf(CarBrandEngineDto::class)
             ->and($result->name)->toBe($model->name)
             ->and($result->slug)->toBe($model->slug)
             ->and($result->logo)->toBe($model->logo)

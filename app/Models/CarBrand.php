@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model};
+use Illuminate\Database\Eloquent\{
+    Builder,
+    Factories\HasFactory,
+    Model
+};
 
 /**
  * @property int $id
@@ -15,7 +19,7 @@ use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model};
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Engine> $engines
- * @property int|null $engines_count
+ * @property-read int|null $engines_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CarModel> $models
  * @property-read int|null $models_count
  * @method static Builder<static>|CarBrand findNameBySlug(string $slug)
@@ -51,7 +55,11 @@ final class CarBrand extends Model
 
     public function models(): HasMany
     {
-        return $this->hasMany(CarModel::class);
+        return $this->hasMany(
+            CarModel::class,
+            'brand_id',
+            'id'
+        );
     }
 
     public function engines(): HasMany

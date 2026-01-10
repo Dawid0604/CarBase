@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 use Pest\Laravel as laravel;
-use App\Models\{Engine, User};
-use Illuminate\Support\Collection;
-use App\ValueObjects\EngineDetailsDto;
-use App\Services\{CarBrandService, EngineService};
+use App\Models\{
+    CarBrand,
+    Engine,
+    User
+};
+use App\ValueObjects\Engine\EngineDetailsDto;
+use App\Services\{
+    CarBrandService,
+    EngineService
+};
 
 describe('EngineController tests', function (): void {
 
@@ -78,30 +84,15 @@ describe('EngineController tests', function (): void {
     describe('list enpoint tests', function (): void {
         it('returns successfully response', function (): void {
             // Arrange
-            $slug = 'xyz';
-            $engineServiceMock = Mockery::mock(EngineService::class);
-            $brandServiceMock = Mockery::mock(CarBrandService::class);
+            $slug = 'xyz-3';
 
-            $engineServiceMock
-                ->shouldReceive('findAllByBrand')
-                ->with($slug)
-                ->once()
-                ->andReturn(new Collection());
+            $brand = CarBrand::factory()->create([
+                'slug' => $slug
+            ]);
 
-            $brandServiceMock
-                ->shouldReceive('findNameBySlug')
-                ->with($slug)
-                ->once()
-                ->andReturn('xyz 2');
-
-            $brandServiceMock
-                ->shouldReceive('findRandomEngines')
-                ->with($slug)
-                ->once()
-                ->andReturn(new Collection());
-
-            App::instance(CarBrandService::class, $brandServiceMock);
-            App::instance(EngineService::class, $engineServiceMock);
+            Engine::factory(3)->create([
+                'brand_id' => $brand
+            ]);
 
             // Act
             $response = laravel\get(
@@ -112,7 +103,7 @@ describe('EngineController tests', function (): void {
             $response->assertOk();
             $response->assertViewIs('engine.list');
             $response->assertViewHas('engines');
-            $response->assertViewHas('brand.name');
+            $response->assertViewHas('brand.name', $brand->name);
             $response->assertViewHas('otherBrands');
         });
     });

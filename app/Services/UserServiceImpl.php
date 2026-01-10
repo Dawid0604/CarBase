@@ -7,13 +7,14 @@ namespace App\Services;
 use Override;
 use App\Models\User;
 use App\Repositories\UserRepository;
-use App\ValueObjects\CreateUserDto;
+use App\ValueObjects\User\CreateUserDto;
 
 final class UserServiceImpl implements UserService
 {
     public function __construct(
         private readonly UserRepository $userRepository
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function create(array $data): User

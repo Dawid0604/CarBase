@@ -2,14 +2,18 @@
 
 declare(strict_types=1);
 
-use App\Models\CarBrand;
-use App\Models\Engine;
-use App\ValueObjects\EngineDto;
+use App\Models\{
+    CarBrand,
+    Engine
+};
 use Illuminate\Support\Collection;
 use App\Services\EngineServiceImpl;
 use App\Repositories\EngineRepository;
-use App\ValueObjects\EngineDetailsDto;
-use App\ValueObjects\EngineListDto;
+use App\ValueObjects\Engine\{
+    EngineDetailsDto,
+    EngineDto,
+    EngineListDto
+};
 
 describe('EngineServiceImpl tests', function () {
 

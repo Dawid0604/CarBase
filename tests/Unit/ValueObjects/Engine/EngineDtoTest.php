@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
-use App\ValueObjects\EngineDto;
-use App\Models\{CarBrand, Engine};
+use App\ValueObjects\Engine\EngineDto;
+use App\Models\{
+    CarBrand,
+    Engine
+};
 
 describe('EngineDto tests', function (): void {
 
@@ -24,11 +27,11 @@ describe('EngineDto tests', function (): void {
             ->and($result->slug)->toBe($model->slug)
             ->and($result->fuelType)->toBe($model->fuel_type->getTranslatedName())
             ->and($result->stats)->toMatchArray([
-                'number_of_views' => $model->number_of_views
-            ])
+                    'number_of_views' => $model->number_of_views
+                ])
             ->and($result->brand)->toMatchArray([
-                'name' => $model->brand->name,
-                'logo' => $model->brand->logo
-            ]);
+                    'name' => $model->brand->name,
+                    'logo' => $model->brand->logo
+                ]);
     });
 });

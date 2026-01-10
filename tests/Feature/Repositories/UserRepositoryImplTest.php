@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User;
-use App\ValueObjects\CreateUserDto;
+use App\ValueObjects\User\CreateUserDto;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 

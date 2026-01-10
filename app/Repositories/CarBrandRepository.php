@@ -8,7 +8,9 @@ use Illuminate\Support\Collection;
 
 interface CarBrandRepository
 {
-    public function findAll(): Collection;
+    public function findAllWithEngines(): Collection;
+
+    public function findAllWithCarModels(): Collection;
 
     public function findNameBySlug(string $slug): string;
 

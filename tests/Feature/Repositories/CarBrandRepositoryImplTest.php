@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-use App\Models\{CarBrand, Engine};
+use App\Models\{
+    CarBrand,
+    CarModel,
+    Engine
+};
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use App\Repositories\CarBrandRepository;
@@ -10,7 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 describe('CarBrandRepositoryImpl tests', function () {
 
-    describe('findAll() tests', function () {
+    describe('findAllEngines() tests', function () {
 
         it('returns brands with engines count', function () {
             // Arrange
@@ -27,7 +31,7 @@ describe('CarBrandRepositoryImpl tests', function () {
                 ->create(['brand_id' => $brand2]);
 
             // Act
-            $brands = findAll();
+            $brands = findAllWithEngines();
 
             // Assert
             expect($brands)->toHaveCount(3);
@@ -58,7 +62,7 @@ describe('CarBrandRepositoryImpl tests', function () {
             $brand3 = CarBrand::factory()->create(['name' => 'Cherry']);
 
             // Act
-            $brands = findAll();
+            $brands = findAllWithEngines();
 
             // Assert
             expect(
@@ -66,16 +70,16 @@ describe('CarBrandRepositoryImpl tests', function () {
                     ->pluck('name')
                     ->toArray()
             )->toBe([
-                $brand1->name,
-                $brand3->name,
-                $brand2->name
-            ]);
+                        $brand1->name,
+                        $brand3->name,
+                        $brand2->name
+                    ]);
         });
 
         it('returns empty collection when no data', function () {
             // Arrange
             // Act
-            $brands = findAll();
+            $brands = findAllWithEngines();
 
             // Assert
             expect($brands)
@@ -83,9 +87,88 @@ describe('CarBrandRepositoryImpl tests', function () {
                 ->toBeEmpty();
         });
 
-        function findAll(): Collection
+        function findAllWithEngines(): Collection
         {
-            return getCarBrandRepository()->findAll();
+            return getCarBrandRepository()->findAllWithEngines();
+        }
+    });
+
+    describe('findAllCarModels() tests', function () {
+
+        it('returns brands with models count', function () {
+            // Arrange
+            $brand1 = CarBrand::factory()->create();
+            $brand2 = CarBrand::factory()->create();
+            $brand3 = CarBrand::factory()->create();
+
+            CarModel::factory()
+                ->count(3)
+                ->create(['brand_id' => $brand1]);
+
+            CarModel::factory()
+                ->count(2)
+                ->create(['brand_id' => $brand2]);
+
+            // Act
+            $brands = findAllWithCarModels();
+
+            // Assert
+            expect($brands)->toHaveCount(3);
+
+            expect(
+                $brands
+                    ->firstWhere('id', $brand1->id)
+                    ->models_count
+            )->toBe(3);
+
+            expect(
+                $brands
+                    ->firstWhere('id', $brand2->id)
+                    ->models_count
+            )->toBe(2);
+
+            expect(
+                $brands
+                    ->firstWhere('id', $brand3->id)
+                    ->models_count
+            )->toBe(0);
+        });
+
+        it('returns brands ordered by name', function () {
+            // Arrange
+            $brand1 = CarBrand::factory()->create(['name' => 'Alfa Romeo']);
+            $brand2 = CarBrand::factory()->create(['name' => 'Jaguar']);
+            $brand3 = CarBrand::factory()->create(['name' => 'Cherry']);
+
+            // Act
+            $brands = findAllWithCarModels();
+
+            // Assert
+            expect(
+                $brands
+                    ->pluck('name')
+                    ->toArray()
+            )->toBe([
+                        $brand1->name,
+                        $brand3->name,
+                        $brand2->name
+                    ]);
+        });
+
+        it('returns empty collection when no data', function () {
+            // Arrange
+            // Act
+            $brands = findAllWithCarModels();
+
+            // Assert
+            expect($brands)
+                ->toBeInstanceOf(Collection::class)
+                ->toBeEmpty();
+        });
+
+        function findAllWithCarModels(): Collection
+        {
+            return getCarBrandRepository()->findAllWithCarModels();
         }
     });
 
@@ -186,9 +269,9 @@ describe('CarBrandRepositoryImpl tests', function () {
                 ->toBeInstanceOf(Collection::class)
                 ->toBeEmpty();
         })->with([
-            [0],
-            [-1]
-        ]);
+                    [0],
+                    [-1]
+                ]);
 
         function findRandomEngines(string $slug, int $numberOfRows): Collection
         {

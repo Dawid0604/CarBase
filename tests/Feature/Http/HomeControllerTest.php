@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 use Pest\Laravel as laravel;
 use Illuminate\Support\Collection;
-use App\Services\{CarBrandService, EngineService};
+use App\Services\{
+    CarBrandService,
+    EngineService
+};
 
 describe('HomeController tests', function (): void {
 
@@ -14,7 +17,7 @@ describe('HomeController tests', function (): void {
         $engineServiceMock = Mockery::mock(EngineService::class);
 
         $brandServiceMock
-            ->shouldReceive('findAll')
+            ->shouldReceive('findAllWithEngines')
             ->once()
             ->andReturn(new Collection());
 

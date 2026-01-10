@@ -6,8 +6,8 @@ namespace App\Repositories;
 
 use Override;
 use App\Models\User;
-use App\ValueObjects\CreateUserDto;
 use Illuminate\Support\Facades\Hash;
+use App\ValueObjects\User\CreateUserDto;
 
 final class UserRepositoryImpl implements UserRepository
 {

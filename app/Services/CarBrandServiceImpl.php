@@ -5,22 +5,36 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Override;
-use App\ValueObjects\CarBrandDto;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use App\Repositories\CarBrandRepository;
+use App\ValueObjects\Brand\{
+    CarBrandEngineDto,
+    CarBrandModelDto
+};
 
 final class CarBrandServiceImpl implements CarBrandService
 {
-    public function __construct(private readonly CarBrandRepository $repository) {}
+    public function __construct(private readonly CarBrandRepository $repository)
+    {
+    }
 
     #[Override]
-    public function findAll(): Collection
+    public function findAllWithEngines(): Collection
     {
         return $this
             ->repository
-            ->findAll()
-            ->map(CarBrandDto::fromModel(...));
+            ->findAllWithEngines()
+            ->map(CarBrandEngineDto::fromModel(...));
+    }
+
+    #[Override]
+    public function findAllWithCarModels(): Collection
+    {
+        return $this
+            ->repository
+            ->findAllWithCarModels()
+            ->map(CarBrandModelDto::fromModel(...));
     }
 
     #[Override]
@@ -39,6 +53,6 @@ final class CarBrandServiceImpl implements CarBrandService
         return $this
             ->repository
             ->findRandomEngines($slug, $numberOfRows)
-            ->map(CarBrandDto::fromModel(...));
+            ->map(CarBrandEngineDto::fromModel(...));
     }
 }

@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\ValueObjects;
+namespace App\ValueObjects\Brand;
 
 use App\Models\CarBrand;
 
-final readonly class CarBrandDto
+final readonly class CarBrandModelDto extends AbstractCarBrandDto
 {
     private function __construct(
         public string $name,
         public string $logo,
         public string $slug,
-        public int $numberOfEngines
-    ) {}
+        public int $numberOfModels
+    ) {
+    }
 
     public static function fromModel(CarBrand $model): self
     {
@@ -21,7 +22,7 @@ final readonly class CarBrandDto
             name: $model->name,
             logo: $model->logo,
             slug: $model->slug,
-            numberOfEngines: $model->engines_count ?? 0
+            numberOfModels: $model->models_count ?? 0
         );
     }
 }

@@ -7,11 +7,17 @@ namespace App\Services;
 use Override;
 use Illuminate\Support\Collection;
 use App\Repositories\EngineRepository;
-use App\ValueObjects\{EngineDetailsDto, EngineDto, EngineListDto};
+use App\ValueObjects\Engine\{
+    EngineDetailsDto,
+    EngineDto,
+    EngineListDto
+};
 
 final class EngineServiceImpl implements EngineService
 {
-    public function __construct(private readonly EngineRepository $repository) {}
+    public function __construct(private readonly EngineRepository $repository)
+    {
+    }
 
     #[Override]
     public function findPopular(): Collection

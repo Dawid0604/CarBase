@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use Override;
 use App\Models\Engine;
-use Exception, Override;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\{Config, Log};
+use Illuminate\Support\Facades\{
+    Config,
+    Log
+};
 
 final class EngineRepositoryImpl implements EngineRepository
 {

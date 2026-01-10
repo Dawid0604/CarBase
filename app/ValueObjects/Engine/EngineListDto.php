@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ValueObjects;
+namespace App\ValueObjects\Engine;
 
 use App\Models\Engine;
 use App\Enums\EngineFuelType;
@@ -13,7 +13,8 @@ final readonly class EngineListDto
         public string $name,
         public string $slug,
         public EngineFuelType $fuelType
-    ) {}
+    ) {
+    }
 
     public static function fromModel(Engine $engine): self
     {

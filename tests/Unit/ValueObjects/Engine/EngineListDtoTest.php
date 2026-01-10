@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Models\{CarBrand, Engine};
-use App\ValueObjects\EngineListDto;
+use App\Models\CarBrand;
+use App\Models\Engine;
+use App\ValueObjects\Engine\EngineListDto;
 
 describe('EngineListDto tests', function (): void {
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ValueObjects;
+namespace App\ValueObjects\Engine;
 
 use App\Models\Engine;
 
@@ -15,7 +15,8 @@ final readonly class EngineDto
         public array $brand,
         public array $stats,
         public string $slug
-    ) {}
+    ) {
+    }
 
     public static function fromModel(Engine $model): self
     {

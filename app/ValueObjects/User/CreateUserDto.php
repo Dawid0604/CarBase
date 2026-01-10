@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ValueObjects;
+namespace App\ValueObjects\User;
 
 use InvalidArgumentException;
 
@@ -12,7 +12,8 @@ final readonly class CreateUserDto
         public string $name,
         public string $email,
         public string $password
-    ) {}
+    ) {
+    }
 
     public static function fromArray(array $data): self
     {

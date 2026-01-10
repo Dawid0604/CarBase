@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Illuminate\Support\Collection;
-use App\ValueObjects\EngineDetailsDto;
+use App\ValueObjects\Engine\EngineDetailsDto;
 
 interface EngineService
 {

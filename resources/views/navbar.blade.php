@@ -17,6 +17,10 @@
                 <a class="nav-link" href="{{ route('engine.brand.list') }}">Silniki</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('car.brand.list') }}">Samochody</a>
+            </li>
+
             @guest
                 @if (Route::has('login'))
                     <li class="nav-item">

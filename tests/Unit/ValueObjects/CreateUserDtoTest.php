@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\ValueObjects\CreateUserDto;
+use App\ValueObjects\User\CreateUserDto;
 
 describe('CreateUserDto tests', function () {
 

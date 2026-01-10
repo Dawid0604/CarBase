@@ -6,14 +6,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
-use App\Services\{CarBrandService, EngineService};
+use App\Services\{
+    CarBrandService,
+    EngineService
+};
 
 final class EngineController extends Controller
 {
     public function __construct(
         private readonly EngineService $engineService,
         private readonly CarBrandService $carBrandService
-    ) {}
+    ) {
+    }
 
     public function details(string $slug): View
     {
@@ -36,13 +40,6 @@ final class EngineController extends Controller
                 'name' => $this->carBrandService->findNameBySlug($slug)
             ],
             'otherBrands' => $this->carBrandService->findRandomEngines($slug)
-        ]);
-    }
-
-    public function brandList(): View
-    {
-        return view('engine.brand-list', [
-            'brands' => $this->carBrandService->findAll()
         ]);
     }
 }

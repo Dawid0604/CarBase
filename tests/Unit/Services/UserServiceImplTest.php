@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Models\User;
 use App\Services\UserServiceImpl;
-use App\ValueObjects\CreateUserDto;
 use App\Repositories\UserRepository;
+use App\ValueObjects\User\CreateUserDto;
 
 describe('UserServiceImpl tests', function () {
 
@@ -30,9 +30,9 @@ describe('UserServiceImpl tests', function () {
                 ->with(Mockery::on(
                     fn($dto): bool =>
                     $dto instanceof CreateUserDto
-                        && $dto->name === $data['name']
-                        && $dto->email === $data['email']
-                        && $dto->password === $data['password']
+                    && $dto->name === $data['name']
+                    && $dto->email === $data['email']
+                    && $dto->password === $data['password']
                 ))
                 ->once()
                 ->andReturn($user);
